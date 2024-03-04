@@ -6,7 +6,7 @@
 
 @layer base {
   body {
-    @apply font-poppins text-gray-100;
+    @apply font-arial text-gray-100;
   }
 
   html {
