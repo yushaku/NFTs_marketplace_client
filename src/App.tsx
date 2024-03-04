@@ -1,17 +1,10 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import { useAccount, useEnsName } from 'wagmi'
 import './App.css'
 
 function App() {
-  const { address } = useAccount()
-  const { data, error, status } = useEnsName({ address })
   const [count, setCount] = useState(0)
-
-  if (status === 'pending') return <div>Loading ENS name</div>
-  if (status === 'error')
-    return <div>Error fetching ENS name: {error.message}</div>
 
   return (
     <>
@@ -26,7 +19,6 @@ function App() {
       <h1>Vite + React</h1>
 
       <div className="card">
-        <div>ENS name: {data}</div>
 
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
