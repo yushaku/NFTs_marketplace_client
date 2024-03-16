@@ -1,4 +1,4 @@
-export const connectWalletModal = {
+export const connectModalStyle = {
   '--ck-accent-text-color': '#ffffff',
   '--ck-body-background': '#1e2431',
   '--ck-primary-button-background': '#181d27',
