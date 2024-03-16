@@ -1,12 +1,30 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --background: white;
+  --layer: gray;
+  --focus: #2d3549;
+  --text-primary: black;
+  --text-secondary: royalblue;
+  --accent: purple;
+}
+
+[data-theme='dark'] {
+  --background: #181d27;
+  --layer: #1e2431;
+  --focus: #2d3549;
+  --text-primary: #ffffff;
+  --text-secondary: #373d4c;
+  --accent: #3a78ff;
+}
+
 @layer base {
   body {
-    @apply font-arial text-gray-100;
+    @apply font-poppins text-gray-100;
   }
 
   html {
@@ -16,20 +34,16 @@
 }
 
 @layer utilities {
-  .heading-1 {
-    @apply text-[64px] leading-[67.2px] font-bold;
+  .heading-2xl {
+    @apply text-2xl font-bold text-textPrimary;
   }
 
-  .heading-2 {
-    @apply font-bold text-[48px] leading-[50.4px];
+  .heading-xl {
+    @apply text-xl font-bold text-textPrimary;
   }
 
-  .heading-3 {
-    @apply font-bold sm:text-[32px] sm:leading-[33.6px] text-[28px] leading-[40px] tracking-[-0.25%];
-  }
-
-  .heading4 {
-    @apply font-semibold text-[20px] leading-[26px] tracking-[0.25%];
+  .heading-lg {
+    @apply text-lg font-bold text-textPrimary;
   }
 
   .paragraph-sm {
