@@ -1,11 +1,12 @@
 import {
-  BeakerIcon,
-  HomeIcon,
-  BanknotesIcon,
   ArrowPathIcon,
+  BanknotesIcon,
+  BeakerIcon,
   CalendarIcon,
+  HomeIcon,
   PaperClipIcon
 } from '@heroicons/react/16/solid'
+import { NavLink } from 'react-router-dom'
 import viteLogo from '/vite.svg'
 
 export const Sidebar = () => {
@@ -21,11 +22,14 @@ export const Sidebar = () => {
       <ul className="space-y-4 mt-4">
         {links.map(({ href, title, icon: Icon }) => {
           return (
-            <li className="hover:bg-focus group flex gap-3 px-8 py-5 hover:border-l-accent hover:border-l-4">
-              <Icon className="w-6 h-6 group-hover:fill-accent" />
-              <a href={href} className="heading-4">
+            <li key={href}>
+              <NavLink
+                to={href}
+                className="heading-4 group flex gap-3  hover:bg-focus px-8 py-5 hover:border-l-accent hover:border-l-4"
+              >
+                <Icon className="w-6 h-6 group-hover:fill-accent" />
                 {title}
-              </a>
+              </NavLink>
             </li>
           )
         })}
