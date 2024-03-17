@@ -48,7 +48,7 @@
   }
 
   .paragraph-sm {
-    @apply text-[24px] font-normal leading-[31.2px];
+    @apply text-sm font-normal text-textSecondary;
   }
 
   .paragraph-md {
@@ -69,6 +69,10 @@
 
   .no-focus {
     @apply focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 !important;
+  }
+
+  .btn {
+    @apply px-6 py-3 rounded-lg;
   }
 }
 
