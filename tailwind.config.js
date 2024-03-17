@@ -8,8 +8,8 @@ export default {
       md: '768px',
       lg: '1024px',
       xl: '1220px',
-      '2xl': '1440px',
-      '3xl': '1700px'
+      '2xl': '1220px',
+      '3xl': '1220px'
     },
     container: {
       center: true,
@@ -25,6 +25,7 @@ export default {
       colors: {
         background: 'var(--background)',
         accent: 'var(--accent)',
+        lighterAccent: 'var(--lighter-accent)',
         layer: 'var(--layer)',
         focus: 'var(--focus)',
         textPrimary: 'var(--text-primary)',

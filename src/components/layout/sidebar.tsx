@@ -12,7 +12,7 @@ import viteLogo from '/vite.svg'
 export const Sidebar = () => {
   return (
     <section className="h-screen w-72 bg-layer">
-      <div className="flex gap-3 items-center p-8 mt-4">
+      <div className="flex gap-3 items-center p-8">
         <img src={viteLogo} className="size-10" alt="Vite logo" />
         <h3 className="heading-2xl">Yushaku</h3>
       </div>
