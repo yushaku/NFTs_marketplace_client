@@ -8,6 +8,7 @@ export const env = cleanEnv(import.meta.env, {
 export const routes = {
   home: '/',
   swap: '/swap',
+  nfts: '/nfts',
   dashboard: '/dashboard'
 } as const
 

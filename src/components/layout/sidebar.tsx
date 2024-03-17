@@ -1,13 +1,14 @@
 import {
   ArrowPathIcon,
   BanknotesIcon,
-  BeakerIcon,
   CalendarIcon,
   HomeIcon,
-  PaperClipIcon
+  PaperClipIcon,
+  PhotoIcon
 } from '@heroicons/react/16/solid'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import viteLogo from '/vite.svg'
+import logo from '/logo.png'
+import { routes } from '@/utils'
 
 export const Sidebar = () => {
   const location = useLocation().pathname
@@ -15,7 +16,7 @@ export const Sidebar = () => {
   return (
     <section className="h-screen w-72 bg-layer">
       <Link to="/" className="flex gap-3 items-center p-8">
-        <img src={viteLogo} className="size-10" alt="Vite logo" />
+        <img src={logo} className="size-10" alt="Vite logo" />
         <h3 className="heading-2xl">Yushaku</h3>
       </Link>
 
@@ -47,12 +48,12 @@ const links = [
   {
     icon: HomeIcon,
     title: 'Dashboard',
-    href: '/dashboard'
+    href: routes.dashboard
   },
   {
-    icon: BeakerIcon,
-    title: 'Core pool',
-    href: '/pool'
+    icon: PhotoIcon,
+    title: 'NFTs',
+    href: routes.nfts
   },
   {
     icon: BanknotesIcon,
@@ -62,7 +63,7 @@ const links = [
   {
     icon: ArrowPathIcon,
     title: 'Swap',
-    href: '/swap'
+    href: routes.swap
   },
   {
     icon: CalendarIcon,
