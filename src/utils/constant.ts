@@ -7,7 +7,7 @@ export const env = cleanEnv(import.meta.env, {
 
 export const routes = {
   home: '/',
-  swap: '/swap',
+  trade: '/trade',
   nfts: '/nfts',
   dashboard: '/dashboard'
 } as const
@@ -19,3 +19,6 @@ export const JSON_RPC = {
   1: [`https://mainnet.infura.io/v3/${env.VITE_INFURA_KEY}`],
   5: [`https://goerli.infura.io/v3/${env.VITE_INFURA_KEY}`]
 }
+
+export const TOKEN_GOVERNANCE = '0x7AFa15757A8012C3ECc0948154AD0f99c3b3c116'
+export const TOKEN_USDT = '0x7AFa15757A8012C3ECc0948154AD0f99c3b3c116'

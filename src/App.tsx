@@ -15,7 +15,7 @@ function App() {
           <Route path="/" element={<Home />} />
 
           <Route path={routes.dashboard} element={<Dashboard />} />
-          <Route path={routes.swap} element={<Swap />} />
+          <Route path={routes.trade} element={<Swap />} />
           <Route path={routes.nfts} element={<Nfts />} />
           <Route path="*" element={<NotMatch />} />
         </Routes>

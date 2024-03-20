@@ -62,8 +62,8 @@ const links = [
   },
   {
     icon: ArrowPathIcon,
-    title: 'Swap',
-    href: routes.swap
+    title: 'Trade',
+    href: routes.trade
   },
   {
     icon: CalendarIcon,

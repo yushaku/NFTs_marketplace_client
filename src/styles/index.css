@@ -67,12 +67,24 @@
     @apply flex justify-center items-center;
   }
 
+  .flex-start {
+    @apply flex justify-start items-center;
+  }
+
   .no-focus {
     @apply focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 !important;
   }
 
   .btn {
     @apply px-6 py-3 rounded-lg;
+  }
+
+  .btn-outline {
+    @apply border border-gray-600 bg-layer hover:bg-focus;
+  }
+
+  .btn-solid {
+    @apply bg-accent hover:bg-lighterAccent;
   }
 }
 

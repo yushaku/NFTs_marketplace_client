@@ -1,6 +1,7 @@
 import { MoonIcon, SunIcon } from '@heroicons/react/16/solid'
 import { ConnectKitButton } from 'connectkit'
 import { useLocation } from 'react-router-dom'
+import { SelectChain } from '../common/SelectChain'
 
 type Props = {
   theme: string
@@ -24,6 +25,7 @@ export const Header = ({ theme, switchTheme }: Props) => {
           )}
         </button>
 
+        <SelectChain />
         <WalletButton />
       </div>
     </header>

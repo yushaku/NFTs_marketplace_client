@@ -33,7 +33,7 @@ export const Swap = () => {
         })}
       </div>
 
-      <div className="mt-6 flex gap-3 h-[50%]">
+      <div className="mt-6 flex h-[50%]">
         <Tab isOpen={type === 'chart'}>
           <AdvancedRealTimeChart
             symbol={crypto}
@@ -65,7 +65,11 @@ export const Swap = () => {
         </Tab>
 
         <Tab isOpen={type === 'heatmap'}>
-          <CryptoCoinsHeatmap colorTheme="dark"></CryptoCoinsHeatmap>
+          <CryptoCoinsHeatmap
+            width="100%"
+            height="100%"
+            colorTheme="dark"
+          ></CryptoCoinsHeatmap>
         </Tab>
       </div>
     </section>
