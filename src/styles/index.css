@@ -75,6 +75,10 @@
     @apply focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 !important;
   }
 
+  .animate {
+    @apply transition-all duration-500;
+  }
+
   .btn {
     @apply px-6 py-3 rounded-lg;
   }

@@ -5,7 +5,8 @@ import ReactDOM from 'react-dom/client'
 import { WagmiProvider } from 'wagmi'
 import App from './App.tsx'
 import './styles/index.css'
-import { config, connectModalStyle } from './utils'
+import { config, connectModalStyle, env } from './utils'
+import { ThirdwebProvider } from '@thirdweb-dev/react'
 
 const queryClient = new QueryClient()
 
@@ -14,7 +15,12 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <ConnectKitProvider customTheme={connectModalStyle}>
-          <App />
+          <ThirdwebProvider
+            activeChain="binance-testnet"
+            clientId={env.VITE_THIRD_WEB}
+          >
+            <App />
+          </ThirdwebProvider>
         </ConnectKitProvider>
       </QueryClientProvider>
     </WagmiProvider>

@@ -14,7 +14,9 @@ export const Header = ({ theme, switchTheme }: Props) => {
 
   return (
     <header className="flex justify-between py-5 mt-5">
-      <h3 className="heading-2xl text-lighterAccent">{pathName}</h3>
+      <h3 className="heading-2xl text-lighterAccent">
+        {pathName.split('/')[0]}
+      </h3>
 
       <div className="flex-center gap-3">
         <button className="p-3" onClick={switchTheme}>

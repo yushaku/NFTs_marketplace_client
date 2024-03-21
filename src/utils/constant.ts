@@ -2,7 +2,9 @@ import { cleanEnv, str } from 'envalid'
 
 export const env = cleanEnv(import.meta.env, {
   VITE_WALLET_CONNECT_ID: str(),
-  VITE_INFURA_KEY: str()
+  VITE_INFURA_KEY: str(),
+  VITE_THIRD_WEB: str(),
+  VITE_THIRD_WEB_SECRET: str()
 })
 
 export const routes = {

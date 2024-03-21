@@ -8,10 +8,11 @@ import {
   GlobeAltIcon
 } from '@heroicons/react/16/solid'
 import { Link } from 'react-router-dom'
+import { routes } from '@/utils'
 
 export const Home = () => {
   return (
-    <section className="bg-background relative no-scrollbar">
+    <section className="bg-background relative no-scrollbar overflow-hidden">
       <Navbar />
       <TopIntro />
       <Safety />
@@ -37,7 +38,7 @@ const Navbar = () => {
           </li>
         ))}
         <li className="gradient_accent btn z-50">
-          <Link to="/swap">Launch App</Link>
+          <Link to={routes.trade}>Launch App</Link>
         </li>
       </ul>
     </header>
@@ -69,7 +70,7 @@ const TopIntro = () => {
         cross-margining for max efficiency.
       </p>
 
-      <Link to="/swap" className="gradient_accent btn mt-10 z-50">
+      <Link to={routes.trade} className="gradient_accent btn mt-10 z-50">
         Start Trading
       </Link>
 
@@ -120,9 +121,9 @@ const Backer = () => {
         Industry-leading market makers and venture capital firms.
       </p>
 
-      <ul className="flex gap-5 my-10">
+      <ul className="flex-center gap-5 my-10 flex-wrap">
         {backerList.map((backer) => (
-          <li className="w-[200px] flex-center p-5 hover:bg-focus bg-layer rounded-lg">
+          <li className="w-[200px] h-[110px] z-10 flex-center p-5 hover:bg-focus bg-layer rounded-lg">
             <img src={backer} alt="backer" />
           </li>
         ))}
@@ -158,11 +159,11 @@ const Safety = () => {
         security of your assets
       </p>
 
-      <ul className="mt-10 flex-center gap-5">
+      <ul className="mt-20 flex-center gap-5 flex-wrap">
         {data.map(({ title, desc, icon: Icon }, index) => (
           <li
             key={index}
-            className="mt-10 w-1/4 p-5 bg-layer hover:bg-focus h-[250px] rounded-xl"
+            className="w-[300px] p-5 bg-layer hover:bg-focus h-[250px] rounded-xl"
           >
             <Icon className="size-10 mb-10 mt-5" />
             <h4 className="text-2xl font-bold">{title}</h4>

@@ -13,6 +13,8 @@
     "@headlessui/react": "^1.7.18",
     "@heroicons/react": "^2.1.1",
     "@tanstack/react-query": "^5.24.8",
+    "@thirdweb-dev/react": "^4.4.23",
+    "@thirdweb-dev/sdk": "^4.0.49",
     "@uniswap/widgets": "^2.59.0",
     "connectkit": "^1.7.2",
     "envalid": "^8.0.0",

@@ -17,15 +17,16 @@ export const Sidebar = () => {
     <section className="h-screen w-72 bg-layer">
       <Link to="/" className="flex gap-3 items-center p-8">
         <img src={logo} className="size-10" alt="Vite logo" />
-        <h3 className="heading-2xl">Yushaku</h3>
+        <h3 className="heading-2xl text-lighterAccent">Yushaku</h3>
       </Link>
 
       <span className="block h-[1px] w-3/5 mx-auto bg-gray-400/30" />
 
       <ul className="space-y-4 mt-4">
         {links.map(({ href, title, icon: Icon }) => {
-          const pickedStyle =
-            location === href ? 'border-l-accent border-l-4 bg-focus' : ''
+          const pickedStyle = location.includes(href)
+            ? 'border-l-accent border-l-4 bg-focus'
+            : ''
 
           return (
             <li key={href}>
