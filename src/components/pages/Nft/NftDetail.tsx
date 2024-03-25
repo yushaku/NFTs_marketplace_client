@@ -1,4 +1,4 @@
-import abi from '@/abi/erc721.json'
+import { ERC721_ABI } from '@/abi/erc721.ts'
 import { DotLoader } from '@/components/common/Loading'
 import { useParams } from 'react-router-dom'
 import { Address } from 'viem'
@@ -7,7 +7,7 @@ import { FuckNFT } from './fuck'
 
 export const NftDetail = () => {
   const { id: address } = useParams()
-  const config = { abi, address: address as Address } as const
+  const config = { abi: ERC721_ABI, address: address as Address } as const
 
   const { data, isLoading } = useReadContracts({
     contracts: [
@@ -42,14 +42,6 @@ export const NftDetail = () => {
   )
 }
 
-const Artist = ({ url }: { url: string }) => {
-  switch (url.split('.').at(-1)) {
-    case 'pm4':
-      return <video src={url} className="w-80 h-40" />
-    default:
-      return <img src={url} alt="NFT" className="w-80 h-40" />
-  }
-}
 const ipfsgateWay = 'https://ipfs.io/ipfs'
 
 const fake = [

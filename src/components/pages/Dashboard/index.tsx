@@ -1,8 +1,11 @@
-import { abi } from '@/abi/abi'
+import { ERC20_ABI } from '@/abi/erc20.ts'
+import { stakeModuleABI } from '@/abi/stakeModule.ts'
 import { useNativeToken } from '@/hooks/useNativeToken'
-import { TOKEN_GOVERNANCE, shortenAddress } from '@/utils'
+import { STAKE_ADRESS, TOKEN_GOVERNANCE, shortenAddress } from '@/utils'
 import { useAccount, useBalance, useEnsName, useReadContract } from 'wagmi'
-import { USDT } from '../icons'
+import { formatEther } from 'viem'
+import { USDT } from '@/components/icons'
+import { StakeForm } from './stakeForm'
 
 export const Dashboard = () => {
   const { address } = useAccount()
@@ -12,23 +15,29 @@ export const Dashboard = () => {
   const ens = useEnsName({ address: address })
 
   const yskbalance = useReadContract({
-    abi,
+    abi: ERC20_ABI,
     address: TOKEN_GOVERNANCE,
     functionName: 'balanceOf',
     args: [address ?? '0x0']
   })
 
+  const totalStaked = useReadContract({
+    abi: stakeModuleABI,
+    address: STAKE_ADRESS,
+    functionName: 'totalStakedAmount'
+  })
+
   return (
     <>
-      <h3 className="text-gray-400 text-sm flex items-center gap-3">
+      <h3 className="text-gray-400 text-lg flex items-center gap-3">
         <span>{ens?.data ? ens.data : shortenAddress(address)}:</span>
-        <strong className="text-lg font-bold">
+        <strong className="font-bold">
           {balance.data?.formatted.slice(0, 5)}
           <NativeToken className="size-5 inline-block ml-3" />
         </strong>
       </h3>
 
-      <section className="flex gap-10 mt-10 min-h-[75%]">
+      <section className="flex gap-10 mt-10">
         <div className="w-1/2 bg-layer p-5 h-fit rounded-xl">
           <h3 className="text-xl font-bold flex items-center gap-2">
             <img className="size-10" src="/logo.png" alt="logo" /> YSK
@@ -47,7 +56,7 @@ export const Dashboard = () => {
             <p className="text-center">
               <span className="block text-sm text-gray-400">Your Balance</span>
               <strong className="text-xl font-bold flex gap-2 items-center">
-                {(Number(yskbalance.data) / 10 ** 18).toFixed(2)}
+                {formatEther(yskbalance?.data ?? 0n)}
                 <img className="size-7" src="/logo.png" alt="logo" />
               </strong>
             </p>
@@ -73,7 +82,7 @@ export const Dashboard = () => {
               <span className="block text-sm text-gray-400">Total Staked</span>
               <strong className="flex-start gap-2 text-xl font-bold">
                 <img className="size-7" src="/logo.png" alt="logo" />
-                7.2M
+                {formatEther(totalStaked?.data ?? 0n)}
               </strong>
             </p>
           </article>
@@ -134,6 +143,8 @@ export const Dashboard = () => {
           </article>
         </div>
       </section>
+
+      <StakeForm />
     </>
   )
 }
