@@ -5,15 +5,6 @@
 @tailwind utilities;
 
 :root {
-  --background: white;
-  --layer: gray;
-  --focus: #2d3549;
-  --text-primary: black;
-  --text-secondary: royalblue;
-  --accent: purple;
-}
-
-[data-theme='dark'] {
   --background: #181d27;
   --layer: #1e2431;
   --focus: #2d3549;
@@ -21,6 +12,15 @@
   --text-secondary: #373d4c;
   --accent: #3a78ff;
   --lighter-accent: #6ca3ff;
+}
+
+[data-theme='light'] {
+  --background: white;
+  --layer: gray;
+  --focus: #2d3549;
+  --text-primary: black;
+  --text-secondary: royalblue;
+  --accent: purple;
 }
 
 @layer base {

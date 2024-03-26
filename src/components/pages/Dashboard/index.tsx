@@ -1,25 +1,29 @@
 import { ERC20_ABI } from '@/abi/erc20.ts'
 import { stakeModuleABI } from '@/abi/stakeModule.ts'
-import { useNativeToken } from '@/hooks/useNativeToken'
-import { STAKE_ADRESS, TOKEN_GOVERNANCE, shortenAddress } from '@/utils'
-import { useAccount, useBalance, useEnsName, useReadContract } from 'wagmi'
-import { formatEther } from 'viem'
 import { USDT } from '@/components/icons'
+import { STAKE_ADRESS, TOKEN_GOVERNANCE, shortenAddress } from '@/utils'
+import { useState } from 'react'
+import { formatEther } from 'viem'
+import { useAccount, useEnsName, useReadContract } from 'wagmi'
 import { StakeForm } from './stakeForm'
+import { NativeBalance } from '@/components/common/NativeTokenBalance'
 
 export const Dashboard = () => {
-  const { address } = useAccount()
-  const NativeToken = useNativeToken()
+  const [openModal, setOpenModal] = useState({
+    stake: false,
+    claim: false
+  })
 
-  const balance = useBalance({ address: address })
+  const { address } = useAccount()
   const ens = useEnsName({ address: address })
 
-  const yskbalance = useReadContract({
+  const yskRes = useReadContract({
     abi: ERC20_ABI,
     address: TOKEN_GOVERNANCE,
     functionName: 'balanceOf',
     args: [address ?? '0x0']
   })
+  const yuBalance = formatEther(yskRes?.data ?? 0n)
 
   const totalStaked = useReadContract({
     abi: stakeModuleABI,
@@ -31,10 +35,7 @@ export const Dashboard = () => {
     <>
       <h3 className="text-gray-400 text-lg flex items-center gap-3">
         <span>{ens?.data ? ens.data : shortenAddress(address)}:</span>
-        <strong className="font-bold">
-          {balance.data?.formatted.slice(0, 5)}
-          <NativeToken className="size-5 inline-block ml-3" />
-        </strong>
+        <NativeBalance address={address} />
       </h3>
 
       <section className="flex gap-10 mt-10">
@@ -56,7 +57,7 @@ export const Dashboard = () => {
             <p className="text-center">
               <span className="block text-sm text-gray-400">Your Balance</span>
               <strong className="text-xl font-bold flex gap-2 items-center">
-                {formatEther(yskbalance?.data ?? 0n)}
+                {yuBalance}
                 <img className="size-7" src="/logo.png" alt="logo" />
               </strong>
             </p>
@@ -88,8 +89,18 @@ export const Dashboard = () => {
           </article>
 
           <article className="flex gap-5 mt-10">
-            <button className="btn btn-solid w-1/2">Stake</button>
-            <button className="btn btn-outline w-1/2">Claim</button>
+            <button
+              onClick={() => setOpenModal({ ...openModal, stake: true })}
+              className="btn btn-solid w-1/2"
+            >
+              Stake
+            </button>
+            <button
+              onClick={() => setOpenModal({ ...openModal, claim: true })}
+              className="btn btn-outline w-1/2"
+            >
+              Claim
+            </button>
           </article>
         </div>
 
@@ -144,7 +155,11 @@ export const Dashboard = () => {
         </div>
       </section>
 
-      <StakeForm />
+      <StakeForm
+        isOpen={openModal.stake}
+        setOpen={() => setOpenModal({ ...openModal, stake: false })}
+        accountBalance={yuBalance}
+      />
     </>
   )
 }
