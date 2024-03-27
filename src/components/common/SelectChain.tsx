@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { BSC } from '../icons/BSC'
+import { Ethereum } from '../icons/Ethereum'
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/16/solid'
 import { Fragment } from 'react'
 import { useChainId, useSwitchChain } from 'wagmi'
-import { Ethereum } from '../icons/Ethereum'
-import { BSC } from '../icons/BSC'
 
 function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(' ')
@@ -23,11 +23,11 @@ export const SelectChain = () => {
       className={`${chainId ? 'block' : 'hidden'} relative inline-block text-left`}
     >
       <div>
-        <Menu.Button className="flex-center w-full gap-3 rounded-xl hover:bg-focus border border-gray-700 bg-layer px-6 py-3 text-sm font-semibold">
+        <Menu.Button className="flex-center w-full gap-3 rounded-xl border border-gray-700 bg-layer px-6 py-3 text-sm font-semibold hover:bg-focus">
           <Logo className="size-5" />
           {name}
           <ChevronDownIcon
-            className="-mr-1 h-5 w-5 text-gray-200"
+            className="-mr-1 size-5 text-gray-200"
             aria-hidden="true"
           />
         </Menu.Button>
@@ -42,7 +42,7 @@ export const SelectChain = () => {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <Menu.Items className="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black focus:outline-none">
           <div className="py-1">
             {chainList.map(({ id, name, logo: Logo }) => {
               return (
@@ -52,7 +52,7 @@ export const SelectChain = () => {
                       onClick={() => switchChain({ chainId: id })}
                       className={classNames(
                         active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                        'flex items-center gap-3 px-4 py-3 text-sm w-full'
+                        'flex w-full items-center gap-3 px-4 py-3 text-sm'
                       )}
                     >
                       <Logo className="size-5" />

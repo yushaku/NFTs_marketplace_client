@@ -1,3 +1,5 @@
+import logo from '/logo.png'
+import { routes } from '@/utils'
 import {
   ArrowPathIcon,
   BanknotesIcon,
@@ -7,22 +9,20 @@ import {
   PhotoIcon
 } from '@heroicons/react/16/solid'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import logo from '/logo.png'
-import { routes } from '@/utils'
 
 export const Sidebar = () => {
   const location = useLocation().pathname
 
   return (
     <section className="h-screen w-72 bg-layer">
-      <Link to="/" className="flex gap-3 items-center p-8">
+      <Link to="/" className="flex items-center gap-3 p-8">
         <img src={logo} className="size-10" alt="Vite logo" />
         <h3 className="heading-2xl text-lighterAccent">Yushaku</h3>
       </Link>
 
-      <span className="block h-[1px] w-3/5 mx-auto bg-gray-400/30" />
+      <span className="mx-auto block h-px w-3/5 bg-gray-400/30" />
 
-      <ul className="space-y-4 mt-4">
+      <ul className="mt-4 space-y-4">
         {links.map(({ href, title, icon: Icon }) => {
           const pickedStyle = location.includes(href)
             ? 'border-l-accent border-l-4 bg-focus'
@@ -32,9 +32,9 @@ export const Sidebar = () => {
             <li key={href}>
               <NavLink
                 to={href}
-                className={`${pickedStyle} heading-4 group flex gap-3  hover:bg-focus px-8 py-5 hover:border-l-accent hover:border-l-4`}
+                className={`${pickedStyle} group flex gap-3  px-8 py-5 hover:border-l-4 hover:border-l-accent hover:bg-focus`}
               >
-                <Icon className="w-6 h-6 group-hover:fill-accent" />
+                <Icon className="size-6 group-hover:fill-accent" />
                 {title}
               </NavLink>
             </li>

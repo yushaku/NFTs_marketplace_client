@@ -6,7 +6,7 @@ import { TwitterX } from '../icons/TwitterX'
 export const Footer = () => {
   const now = new Date().getFullYear()
   return (
-    <footer className="my-10 flex justify-between items-center">
+    <footer className="my-10 flex items-center justify-between">
       <p className="flex gap-4 text-sm">
         <span>© {now} Yushaku DEX</span> |
         <Link className="hover:text-accent" to={'#'}>
@@ -17,7 +17,7 @@ export const Footer = () => {
       <ul className="flex gap-5">
         {socials.map(({ title, url, icon: Icon }) => (
           <li key={title}>
-            <Link to={url} className="block p-3 hover:bg-layer rounded-lg">
+            <Link to={url} className="block rounded-lg p-3 hover:bg-layer">
               <Icon className="size-5" />
             </Link>
           </li>

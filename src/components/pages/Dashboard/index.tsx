@@ -33,37 +33,37 @@ export const Dashboard = () => {
 
   return (
     <>
-      <h3 className="text-gray-400 text-lg flex items-center gap-3">
+      <h3 className="flex items-center gap-3 text-lg text-gray-400">
         <span>{ens?.data ? ens.data : shortenAddress(address)}:</span>
         <NativeBalance address={address} />
       </h3>
 
-      <section className="flex gap-10 mt-10">
-        <div className="w-1/2 bg-layer p-5 h-fit rounded-xl">
-          <h3 className="text-xl font-bold flex items-center gap-2">
+      <section className="mt-10 flex gap-10">
+        <div className="h-fit w-1/2 rounded-xl bg-layer p-5">
+          <h3 className="flex items-center gap-2 text-xl font-bold">
             <img className="size-10" src="/logo.png" alt="logo" /> YSK
           </h3>
 
-          <article className="flex justify-between mt-5">
+          <article className="mt-5 flex justify-between">
             <p className="text-center">
               <span className="block text-sm text-gray-400">
                 you are staking:
               </span>
-              <strong className="text-xl font-bold inline-flex gap-2 items-center">
+              <strong className="inline-flex items-center gap-2 text-xl font-bold">
                 0
                 <img className="size-7" src="/logo.png" alt="logo" />
               </strong>
             </p>
             <p className="text-center">
               <span className="block text-sm text-gray-400">Your Balance</span>
-              <strong className="text-xl font-bold flex gap-2 items-center">
+              <strong className="flex items-center gap-2 text-xl font-bold">
                 {yuBalance}
                 <img className="size-7" src="/logo.png" alt="logo" />
               </strong>
             </p>
           </article>
 
-          <article className="flex justify-between mt-10">
+          <article className="mt-10 flex justify-between">
             <p>
               <span className="block text-sm text-gray-400">XVS Stake APR</span>
               <strong className="text-xl font-bold">8.31%</strong>
@@ -88,7 +88,7 @@ export const Dashboard = () => {
             </p>
           </article>
 
-          <article className="flex gap-5 mt-10">
+          <article className="mt-10 flex gap-5">
             <button
               onClick={() => setOpenModal({ ...openModal, stake: true })}
               className="btn btn-solid w-1/2"
@@ -104,13 +104,13 @@ export const Dashboard = () => {
           </article>
         </div>
 
-        <div className="w-1/2 bg-layer p-5 h-fit rounded-xl">
-          <h3 className="text-xl font-bold flex items-center gap-2">
-            <USDT className="size-9 inline-block" />
+        <div className="h-fit w-1/2 rounded-xl bg-layer p-5">
+          <h3 className="flex items-center gap-2 text-xl font-bold">
+            <USDT className="inline-block size-9" />
             USDT
           </h3>
 
-          <article className="flex justify-between mt-5">
+          <article className="mt-5 flex justify-between">
             <p className="text-center">
               <span className="block text-sm text-gray-400">
                 you are staking:
@@ -123,7 +123,7 @@ export const Dashboard = () => {
             </p>
           </article>
 
-          <article className="flex justify-between mt-10">
+          <article className="mt-10 flex justify-between">
             <p className="text-center">
               <span className="block text-sm text-gray-400">XVS Stake APR</span>
               <strong className="text-xl font-bold">15.1%</strong>
@@ -142,13 +142,13 @@ export const Dashboard = () => {
             <p>
               <span className="block text-sm text-gray-400">Total Staked</span>
               <strong className="flex-start gap-2 text-xl font-bold">
-                <USDT className="size-6 inline-block" />
+                <USDT className="inline-block size-6" />
                 2.68M
               </strong>
             </p>
           </article>
 
-          <article className="flex gap-5 mt-10">
+          <article className="mt-10 flex gap-5">
             <button className="btn btn-solid w-1/2">Stake</button>
             <button className="btn btn-outline w-1/2">Claim</button>
           </article>

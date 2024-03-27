@@ -1,9 +1,9 @@
 import { HTMLAttributes, useState } from 'react'
 import {
   AdvancedRealTimeChart,
-  TechnicalAnalysis,
+  CryptoCoinsHeatmap,
   FundamentalData,
-  CryptoCoinsHeatmap
+  TechnicalAnalysis
 } from 'react-ts-tradingview-widgets'
 import { useChainId } from 'wagmi'
 
@@ -18,13 +18,13 @@ export const Swap = () => {
 
   return (
     <section className="">
-      <div className="flex bg-layer w-fit rounded-lg border-4 border-layer">
+      <div className="flex w-fit rounded-lg border-4 border-layer bg-layer">
         {listFeature.map((feat) => {
           const pickedStyle = type === feat && 'bg-background'
           return (
             <button
               key={feat}
-              className={`${pickedStyle} py-3 px-8 rounded-lg `}
+              className={`${pickedStyle} rounded-lg px-8 py-3 `}
               onClick={() => setType(feat)}
             >
               {feat}
@@ -33,7 +33,7 @@ export const Swap = () => {
         })}
       </div>
 
-      <div className="mt-6 flex h-[50%]">
+      <div className="mt-6 flex h-1/2">
         <Tab isOpen={type === 'chart'}>
           <AdvancedRealTimeChart
             symbol={crypto}
@@ -85,7 +85,7 @@ const Tab = ({ isOpen, children, ...props }: TabType) => {
   return (
     <div
       className={`${className} ${
-        isOpen ? 'opacity-1 w-full' : 'opacity-0 w-0 overflow-hidden'
+        isOpen ? 'w-full opacity-100' : 'w-0 overflow-hidden opacity-0'
       }`}
     >
       {children}

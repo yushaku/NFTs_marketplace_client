@@ -1,15 +1,15 @@
+import { stakeModuleABI } from '@/abi/stakeModule'
 import ModalWarp from '@/components/common/ModalWarper'
 import { STAKE_ADRESS } from '@/utils'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { stakeModuleABI } from '@/abi/stakeModule'
+import { parseUnits } from 'viem'
 import {
   useWaitForTransactionReceipt as useWaitTx,
   useWriteContract
 } from 'wagmi'
 import * as yup from 'yup'
-import { parseUnits } from 'viem'
 
 type Inputs = {
   amount: number
@@ -65,7 +65,7 @@ export const StakeForm = ({ isOpen, setOpen, accountBalance }: Props) => {
       <section className="w-[500px]">
         <p className="text-sm text-gray-300">Your APY: {apy}%</p>
         <form
-          className="flex flex-col gap-5 mt-5"
+          className="mt-5 flex flex-col gap-5"
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className="flex gap-3">
@@ -74,7 +74,7 @@ export const StakeForm = ({ isOpen, setOpen, accountBalance }: Props) => {
                 <label
                   htmlFor={type.id}
                   key={index}
-                  className={`px-4 py-3 border border-gray-700 rounded-lg ${apy === type.apy && 'bg-accent'}`}
+                  className={`rounded-lg border border-gray-700 px-4 py-3 ${apy === type.apy && 'bg-accent'}`}
                   onClick={() => setApy(type.apy)}
                 >
                   {type.title}
@@ -96,12 +96,12 @@ export const StakeForm = ({ isOpen, setOpen, accountBalance }: Props) => {
             <input
               type="text"
               placeholder="Amount"
-              className={`w-full p-3 bg-layer rounded-lg border  focus:border-gray-500 focus:outline-none focus:ring-gray-500 ${errors.amount?.message ? 'border-red-400' : 'border-gray-700'}`}
+              className={`w-full rounded-lg border bg-layer p-3  focus:border-gray-500 focus:outline-none focus:ring-gray-500 ${errors.amount?.message ? 'border-red-400' : 'border-gray-700'}`}
               {...register('amount', { required: true })}
             />
             <span
               onClick={() => setValue('amount', Number(accountBalance))}
-              className="text-accent cursor-pointer absolute top-3 right-5"
+              className="absolute right-5 top-3 cursor-pointer text-accent"
             >
               Max
             </span>
@@ -109,7 +109,7 @@ export const StakeForm = ({ isOpen, setOpen, accountBalance }: Props) => {
           <p>
             your balance: {accountBalance}
             <img
-              className="size-8 inline-block ml-2"
+              className="ml-2 inline-block size-8"
               src="/logo.png"
               alt="logo"
             />
@@ -119,7 +119,7 @@ export const StakeForm = ({ isOpen, setOpen, accountBalance }: Props) => {
             type="submit"
             value={isPending ? 'Pending...' : 'Stake'}
             disabled={isPending}
-            className="cursor-pointer mt-5 w-full p-3 bg-accent rounded-lg hover:bg-lighterAccent"
+            className="mt-5 w-full cursor-pointer rounded-lg bg-accent p-3 hover:bg-lighterAccent"
           />
         </form>
 

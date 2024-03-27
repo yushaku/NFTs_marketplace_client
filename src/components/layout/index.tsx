@@ -22,9 +22,9 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <main data-theme={theme}>
-      <section className="flex bg-background h-screen overflow-hidden">
+      <section className="flex h-screen overflow-hidden bg-background">
         <Sidebar />
-        <div className="container overflow-y-scroll no-scrollbar">
+        <div className="no-scrollbar container overflow-y-scroll">
           <Header theme={theme} switchTheme={switchTheme} />
           {children}
           <Footer />

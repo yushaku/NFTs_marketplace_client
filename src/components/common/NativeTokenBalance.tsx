@@ -27,7 +27,7 @@ export const NativeBalance = ({ address }: { address?: Address }) => {
   return (
     <div className="font-bold">
       {balance.data?.formatted.slice(0, 5)}
-      <Token className="size-5 inline-block ml-3" />
+      <Token className="ml-3 inline-block size-5" />
     </div>
   )
 }

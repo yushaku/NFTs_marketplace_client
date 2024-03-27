@@ -13,7 +13,7 @@ export const Header = ({ theme, switchTheme }: Props) => {
   const pathName = location.slice(1, 2).toUpperCase().concat(location.slice(2))
 
   return (
-    <header className="flex justify-between py-5 mt-5">
+    <header className="mt-5 flex justify-between py-5">
       <h3 className="heading-2xl text-lighterAccent">
         {pathName.split('/')[0]}
       </h3>
@@ -21,9 +21,9 @@ export const Header = ({ theme, switchTheme }: Props) => {
       <div className="flex-center gap-3">
         <button className="p-3" onClick={switchTheme}>
           {theme === 'light' ? (
-            <SunIcon className="w-6 h-6 fill-accent" />
+            <SunIcon className="size-6 fill-accent" />
           ) : (
-            <MoonIcon className="w-6 h-6" />
+            <MoonIcon className="size-6" />
           )}
         </button>
 
@@ -39,7 +39,7 @@ export const WalletButton = () => {
     <ConnectKitButton.Custom>
       {({ isConnected, show, truncatedAddress, ensName }) => {
         return (
-          <button onClick={show} className="px-6 py-2 rounded-lg bg-accent">
+          <button onClick={show} className="rounded-lg bg-accent px-6 py-2">
             {isConnected ? ensName ?? truncatedAddress : 'Connect Wallet'}
           </button>
         )

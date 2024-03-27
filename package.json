@@ -33,6 +33,7 @@
     "yup": "^1.4.0"
   },
   "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.19",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
@@ -42,9 +43,13 @@
     "eslint": "^8.56.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
+    "eslint-plugin-tailwindcss": "^3.15.1",
     "postcss": "^8.4.35",
     "prettier": "^3.2.5",
+    "prettier-plugin-tailwindcss": "^0.5.12",
+    "tailwind-merge": "^2.2.2",
     "tailwindcss": "^3.4.1",
+    "tailwindcss-animated": "^1.0.1",
     "typescript": "^5.2.2",
     "vite": "^5.1.0"
   }

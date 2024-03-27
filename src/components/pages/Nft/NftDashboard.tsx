@@ -8,9 +8,9 @@ export const NftDashboard = () => {
 
   return (
     <section className="w-full">
-      <div className="relative group">
+      <div className="group relative">
         <img
-          className="w-full h-[600px] object-cover"
+          className="h-[600px] w-full object-cover"
           src={selected.img}
           alt="NFT"
         />
@@ -21,19 +21,19 @@ export const NftDashboard = () => {
             <h4 className="text-base">BY {selected.author}</h4>
           </div>
 
-          <div className="mt-6 flex items-center gap-5 animate delay-150 opacity-0 group-hover:opacity-100">
+          <div className="animate mt-6 flex items-center gap-5 opacity-0 delay-150 group-hover:opacity-100">
             <p>
-              <p className="text-gray-300 text-xs">FLOOR PRICE</p>
+              <p className="text-xs text-gray-300">FLOOR PRICE</p>
               <p>4.15 ETH</p>
             </p>
             <p>
-              <p className="text-gray-300 text-xs">1D VOLUME</p>
+              <p className="text-xs text-gray-300">1D VOLUME</p>
               <p>49.15 ETH</p>
             </p>
 
             <Link
               to={`${routes.nfts}/${selected.address}`}
-              className="btn btn-outline flex-start animate delay-300 opacity-0 group-hover:opacity-100"
+              className="btn btn-outline flex-start animate opacity-0 delay-300 group-hover:opacity-100"
             >
               <span>View collection</span>
               <ArrowRightIcon className="size-5" />
@@ -42,23 +42,23 @@ export const NftDashboard = () => {
         </article>
       </div>
 
-      <ul className="relative grid grid-cols-5 gap-5 -translate-y-[50px]">
+      <ul className="relative grid translate-y-[-50px] grid-cols-5 gap-5">
         {collections.map((col, index) => {
           return (
             <li
-              className="group relative cursor-pointer animate hover:-translate-y-2 overflow-hidden"
+              className="animate group relative cursor-pointer overflow-hidden hover:-translate-y-2"
               onClick={() => setSelected(col)}
               key={index}
             >
               <img
                 src={col.img}
                 alt="NFT"
-                className="w-full h-[150px] animate group-hover:scale-110"
+                className="animate h-[150px] w-full group-hover:scale-110"
               />
-              <h3 className="text-sm text-gray-300 animate font-bold z-10 absolute bottom-0 p-4 group-hover:-bottom-6 group-hover:opacity-0">
+              <h3 className="animate absolute bottom-0 z-10 p-4 text-sm font-bold text-gray-300 group-hover:-bottom-6 group-hover:opacity-0">
                 {col.author}
               </h3>
-              <article className="group-hover:-bottom-5 absolute inset-0 w-full bg-gradient-to-t from-[rgba(0,0,0,1)] to-[rgba(255,255,255,0.2)]" />
+              <article className="absolute inset-0 w-full bg-gradient-to-t from-[rgba(0,0,0,1)] to-[rgba(255,255,255,0.2)] group-hover:-bottom-5" />
             </li>
           )
         })}
