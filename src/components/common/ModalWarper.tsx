@@ -45,7 +45,7 @@ export default function ModalWarp({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-fit rounded-2xl bg-background p-6 text-left align-middle shadow-xl transition-all">
+              <Dialog.Panel className="relative w-fit rounded-2xl bg-background p-6 text-left align-middle shadow-xl transition-all">
                 <button className="absolute right-5 top-5">
                   <XCircleIcon
                     onClick={handleClose}

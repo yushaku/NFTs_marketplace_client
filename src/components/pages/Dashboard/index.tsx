@@ -6,7 +6,7 @@ import { NativeBalance } from '@/components/common/NativeTokenBalance'
 import { USDT } from '@/components/icons'
 import { LogTX, STAKE_ADRESS, TOKEN_GOVERNANCE, shortenAddress } from '@/utils'
 import { useState } from 'react'
-import { formatEther } from 'viem'
+import { Address, formatEther } from 'viem'
 import {
   useAccount,
   useEnsName,
@@ -196,7 +196,8 @@ export const Dashboard = () => {
       <StakeForm
         isOpen={openModal.stake}
         setOpen={() => setOpenModal({ ...openModal, stake: false })}
-        accountBalance={yuBalance}
+        address={address as Address}
+        balance={yuBalance}
       />
     </>
   )

@@ -1,4 +1,5 @@
 import { cleanEnv, str } from 'envalid'
+import { parseUnits } from 'viem'
 
 export const env = cleanEnv(import.meta.env, {
   VITE_WALLET_CONNECT_ID: str(),
@@ -26,3 +27,4 @@ export const TOKEN_GOVERNANCE = '0x7AFa15757A8012C3ECc0948154AD0f99c3b3c116'
 export const TOKEN_USDT = '0x7AFa15757A8012C3ECc0948154AD0f99c3b3c116'
 export const NFT_ADRESS = '0x14a9c99d89106F66C2B86910d2C622Ce0A58C630'
 export const STAKE_ADRESS = '0xb407fFcC4D82295790D684F812d97EFdbB6c3122'
+export const MAX_VALUE = parseUnits('9999999999999999999999', 18)
