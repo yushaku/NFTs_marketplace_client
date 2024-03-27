@@ -1,4 +1,5 @@
-import { HTMLAttributes, useState } from 'react'
+import { Tab } from './tab'
+import { useState } from 'react'
 import {
   AdvancedRealTimeChart,
   CryptoCoinsHeatmap,
@@ -73,22 +74,5 @@ export const Swap = () => {
         </Tab>
       </div>
     </section>
-  )
-}
-
-type TabType = HTMLAttributes<HTMLDivElement> & {
-  isOpen: boolean
-  children: React.ReactNode
-}
-const Tab = ({ isOpen, children, ...props }: TabType) => {
-  const className = props.className
-  return (
-    <div
-      className={`${className} ${
-        isOpen ? 'w-full opacity-100' : 'w-0 overflow-hidden opacity-0'
-      }`}
-    >
-      {children}
-    </div>
   )
 }

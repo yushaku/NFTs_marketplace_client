@@ -1,4 +1,5 @@
 import { stakeModuleABI } from '@/abi/stakeModule'
+import { Input } from '@/components/common/Input'
 import ModalWarp from '@/components/common/ModalWarper'
 import { STAKE_ADRESS } from '@/utils'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -47,11 +48,6 @@ export const StakeForm = ({ isOpen, setOpen, accountBalance }: Props) => {
     const { amount, lockType } = data
     const bigintValue = parseUnits(String(amount), 18)
 
-    // sendTransaction({
-    //   to: '0x714d8c3543Da840d0aE23E7a8A1efFFC06Ad05b8',
-    //   value: parseEther('0.01')
-    // })
-
     writeContract({
       address: STAKE_ADRESS,
       abi: stakeModuleABI,
@@ -93,10 +89,10 @@ export const StakeForm = ({ isOpen, setOpen, accountBalance }: Props) => {
           </div>
 
           <label className="relative">
-            <input
+            <Input
               type="text"
               placeholder="Amount"
-              className={`w-full rounded-lg border bg-layer p-3  focus:border-gray-500 focus:outline-none focus:ring-gray-500 ${errors.amount?.message ? 'border-red-400' : 'border-gray-700'}`}
+              error={errors.amount?.message}
               {...register('amount', { required: true })}
             />
             <span
@@ -106,6 +102,7 @@ export const StakeForm = ({ isOpen, setOpen, accountBalance }: Props) => {
               Max
             </span>
           </label>
+
           <p>
             your balance: {accountBalance}
             <img

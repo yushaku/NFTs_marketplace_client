@@ -1,21 +1,27 @@
+import { StakeForm } from './stakeForm'
 import { ERC20_ABI } from '@/abi/erc20.ts'
 import { stakeModuleABI } from '@/abi/stakeModule.ts'
+import { Card } from '@/components/common/Card'
+import { NativeBalance } from '@/components/common/NativeTokenBalance'
 import { USDT } from '@/components/icons'
-import { STAKE_ADRESS, TOKEN_GOVERNANCE, shortenAddress } from '@/utils'
+import { LogTX, STAKE_ADRESS, TOKEN_GOVERNANCE, shortenAddress } from '@/utils'
 import { useState } from 'react'
 import { formatEther } from 'viem'
-import { useAccount, useEnsName, useReadContract } from 'wagmi'
-import { StakeForm } from './stakeForm'
-import { NativeBalance } from '@/components/common/NativeTokenBalance'
+import {
+  useAccount,
+  useEnsName,
+  useReadContract,
+  useWatchContractEvent
+} from 'wagmi'
 
 export const Dashboard = () => {
+  const { address } = useAccount()
+  const ens = useEnsName({ address: address })
   const [openModal, setOpenModal] = useState({
     stake: false,
     claim: false
   })
-
-  const { address } = useAccount()
-  const ens = useEnsName({ address: address })
+  const [logs, setLogs] = useState<Array<LogTX>>([])
 
   const yskRes = useReadContract({
     abi: ERC20_ABI,
@@ -31,6 +37,19 @@ export const Dashboard = () => {
     functionName: 'totalStakedAmount'
   })
 
+  useWatchContractEvent({
+    address: TOKEN_GOVERNANCE,
+    abi: ERC20_ABI,
+    eventName: 'Transfer',
+    onLogs(logs) {
+      console.log('New logs!', logs)
+      setLogs((prev) => [...prev, ...logs])
+    },
+    onError(error) {
+      console.error('Error', error)
+    }
+  })
+
   return (
     <>
       <h3 className="flex items-center gap-3 text-lg text-gray-400">
@@ -39,7 +58,7 @@ export const Dashboard = () => {
       </h3>
 
       <section className="mt-10 flex gap-10">
-        <div className="h-fit w-1/2 rounded-xl bg-layer p-5">
+        <Card className="h-fit w-1/2">
           <h3 className="flex items-center gap-2 text-xl font-bold">
             <img className="size-10" src="/logo.png" alt="logo" /> YSK
           </h3>
@@ -47,7 +66,7 @@ export const Dashboard = () => {
           <article className="mt-5 flex justify-between">
             <p className="text-center">
               <span className="block text-sm text-gray-400">
-                you are staking:
+                You are staking:
               </span>
               <strong className="inline-flex items-center gap-2 text-xl font-bold">
                 0
@@ -102,9 +121,9 @@ export const Dashboard = () => {
               Claim
             </button>
           </article>
-        </div>
+        </Card>
 
-        <div className="h-fit w-1/2 rounded-xl bg-layer p-5">
+        <Card className="h-fit w-1/2">
           <h3 className="flex items-center gap-2 text-xl font-bold">
             <USDT className="inline-block size-9" />
             USDT
@@ -152,8 +171,27 @@ export const Dashboard = () => {
             <button className="btn btn-solid w-1/2">Stake</button>
             <button className="btn btn-outline w-1/2">Claim</button>
           </article>
-        </div>
+        </Card>
       </section>
+
+      <ul className={`${logs.length === 0 && 'hidden'} mt-10`}>
+        <li className="mb-5 text-xl font-bold">logs of transactions</li>
+        <li className="flex justify-between text-lg font-bold text-accent">
+          <span>From</span>
+          <span>To</span>
+          <span>value</span>
+        </li>
+
+        {logs.map((tx, index) => {
+          return (
+            <li key={index} className="flex justify-between text-gray-500">
+              <span>{shortenAddress(tx.args.from)}</span>
+              <span>{shortenAddress(tx.args.to)}</span>
+              <span>{formatEther(tx.args.value)}</span>
+            </li>
+          )
+        })}
+      </ul>
 
       <StakeForm
         isOpen={openModal.stake}
