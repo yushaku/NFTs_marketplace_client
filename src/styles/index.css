@@ -95,6 +95,10 @@
 .tradingview-widget-copyright {
   display: none;
 }
+.js-copyright-label {
+  display: none;
+  opacity: 0;
+}
 
 .no-scrollbar::-webkit-scrollbar {
   display: none;
@@ -104,4 +108,10 @@
 .no-scrollbar {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+}
+
+iframe {
+  .header {
+    display: none;
+  }
 }

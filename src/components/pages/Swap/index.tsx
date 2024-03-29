@@ -1,15 +1,24 @@
+import { JSON_RPC, TOKEN_LIST, uniTheme } from '@/utils'
+import { SwapWidget } from '@uniswap/widgets'
 import { Tab } from './tab'
 import { useState } from 'react'
 import {
   AdvancedRealTimeChart,
   CryptoCoinsHeatmap,
   FundamentalData,
-  TechnicalAnalysis
+  TechnicalAnalysis,
+  Timeline
 } from 'react-ts-tradingview-widgets'
 import { useChainId } from 'wagmi'
 
-type Feature = 'chart' | 'analysis' | 'heatmap'
-const listFeature: Array<Feature> = ['chart', 'analysis', 'heatmap']
+type Feature = 'chart' | 'analysis' | 'heatmap' | 'bubble' | 'news'
+const listFeature: Array<Feature> = [
+  'chart',
+  'analysis',
+  'heatmap',
+  'bubble',
+  'news'
+]
 
 export const Swap = () => {
   const chainId = useChainId()
@@ -35,20 +44,42 @@ export const Swap = () => {
       </div>
 
       <div className="mt-6 flex h-1/2">
-        <Tab isOpen={type === 'chart'}>
-          <AdvancedRealTimeChart
-            symbol={crypto}
-            theme="dark"
-            autosize
-          ></AdvancedRealTimeChart>
+        <Tab isOpen={type === 'chart'} className="flex">
+          <article className="flex-1">
+            <AdvancedRealTimeChart
+              symbol={crypto}
+              theme="dark"
+              range="1D"
+              calendar={false}
+              hide_top_toolbar={false}
+              hide_legend={true}
+              withdateranges={false}
+              autosize
+            ></AdvancedRealTimeChart>
+          </article>
 
-          {/* <SwapWidget */}
-          {/*   tokenList={TOKEN_LIST} */}
-          {/*   defaultInputAmount="1" */}
-          {/*   defaultChainId={chainId} */}
-          {/*   defaultOutputTokenAddress={UNI} */}
-          {/*   defaultInputTokenAddress="NATIVE" */}
-          {/* /> */}
+          <article className="grid gap-3">
+            <SwapWidget
+              theme={uniTheme}
+              onTokenChange={(e) => console.log(JSON.stringify(e))}
+              hideConnectionUI={true}
+              // provider={provider}
+              tokenList={TOKEN_LIST}
+              jsonRpcUrlMap={JSON_RPC}
+              defaultChainId={chainId}
+              // defaultInputAmount="1"
+              defaultInputTokenAddress="NATIVE"
+              // defaultOutputTokenAddress={UNI}
+            />
+
+            <Timeline
+              colorTheme="dark"
+              feedMode="market"
+              market="crypto"
+              height={400}
+              width="100%"
+            />
+          </article>
         </Tab>
 
         <Tab isOpen={type === 'analysis'} className="flex">
@@ -71,6 +102,25 @@ export const Swap = () => {
             height="100%"
             colorTheme="dark"
           ></CryptoCoinsHeatmap>
+        </Tab>
+
+        <Tab isOpen={type === 'bubble'}>
+          <iframe
+            src="https://cryptobubbles.net"
+            width="100%"
+            height="100%"
+            loading="lazy"
+          ></iframe>
+        </Tab>
+
+        <Tab isOpen={type === 'news'}>
+          <Timeline
+            colorTheme="dark"
+            feedMode="market"
+            market="crypto"
+            height="100%"
+            width="100%"
+          />
         </Tab>
       </div>
     </section>

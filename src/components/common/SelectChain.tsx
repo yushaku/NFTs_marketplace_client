@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { BSC } from '../icons/BSC'
-import { Ethereum } from '../icons/Ethereum'
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/16/solid'
 import { Fragment } from 'react'
 import { useChainId, useSwitchChain } from 'wagmi'
+import { Ethereum, Matic } from '../icons'
 
 function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(' ')
@@ -81,13 +80,13 @@ const chainList = [
     logo: Ethereum
   },
   {
-    id: 11155111,
-    name: 'Sepolia',
-    logo: Ethereum
-  },
-  {
-    id: 97,
-    name: 'BSC Testnet',
-    logo: BSC
+    id: 80001,
+    name: 'Mumbai',
+    logo: Matic
   }
+  // {
+  //   id: 97,
+  //   name: 'BSC Testnet',
+  //   logo: BSC
+  // }
 ] as const

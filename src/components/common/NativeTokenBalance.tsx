@@ -1,7 +1,6 @@
-import { BSC } from '@/components/icons/BSC'
-import { Ethereum } from '@/components/icons/Ethereum'
 import { Address } from 'viem'
 import { useBalance, useChainId } from 'wagmi'
+import { Ethereum, Matic } from '../icons'
 
 export const NativeBalance = ({ address }: { address?: Address }) => {
   const chainId = useChainId()
@@ -11,12 +10,11 @@ export const NativeBalance = ({ address }: { address?: Address }) => {
   switch (chainId) {
     case 1:
     case 5:
-    case 11155111:
       Token = Ethereum
       break
 
-    case 97:
-      Token = BSC
+    case 80001:
+      Token = Matic
       break
 
     default:

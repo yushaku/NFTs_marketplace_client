@@ -1,4 +1,3 @@
- 
 import CountUp from 'react-countup'
 import '@/styles/landing.css'
 import TypeIt from 'typeit-react'
@@ -122,8 +121,11 @@ const Backer = () => {
       </p>
 
       <ul className="flex-center my-10 flex-wrap gap-5">
-        {backerList.map((backer) => (
-          <li className="flex-center z-10 h-[110px] w-[200px] rounded-lg bg-layer p-5 hover:bg-focus">
+        {backerList.map((backer, index) => (
+          <li
+            key={index}
+            className="flex-center z-10 h-[110px] w-[200px] rounded-lg bg-layer p-5 hover:bg-focus"
+          >
             <img src={backer} alt="backer" />
           </li>
         ))}
