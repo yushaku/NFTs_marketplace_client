@@ -1,9 +1,8 @@
-import { StakeForm } from './stakeForm'
 import { ERC20_ABI } from '@/abi/erc20.ts'
 import { stakeModuleABI } from '@/abi/stakeModule.ts'
-import { Card } from '@/components/common/Card'
 import { NativeBalance } from '@/components/common/NativeTokenBalance'
 import { USDT } from '@/components/icons'
+import { Card } from '@/components/warper'
 import { LogTX, STAKE_ADRESS, TOKEN_GOVERNANCE, shortenAddress } from '@/utils'
 import { useState } from 'react'
 import { Address, formatEther } from 'viem'
@@ -13,6 +12,7 @@ import {
   useReadContract,
   useWatchContractEvent
 } from 'wagmi'
+import { StakeForm } from './stakeForm'
 
 export const Dashboard = () => {
   const { address } = useAccount()

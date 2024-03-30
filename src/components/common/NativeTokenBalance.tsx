@@ -1,6 +1,6 @@
 import { Address } from 'viem'
 import { useBalance, useChainId } from 'wagmi'
-import { Ethereum, Matic } from '../icons'
+import { ETH, Matic } from '../icons'
 
 export const NativeBalance = ({ address }: { address?: Address }) => {
   const chainId = useChainId()
@@ -10,7 +10,7 @@ export const NativeBalance = ({ address }: { address?: Address }) => {
   switch (chainId) {
     case 1:
     case 5:
-      Token = Ethereum
+      Token = ETH
       break
 
     case 80001:
@@ -18,7 +18,7 @@ export const NativeBalance = ({ address }: { address?: Address }) => {
       break
 
     default:
-      Token = Ethereum
+      Token = ETH
       break
   }
 

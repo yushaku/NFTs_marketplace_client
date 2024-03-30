@@ -1,4 +1,4 @@
-import { JSON_RPC, TOKEN_LIST, uniTheme } from '@/utils'
+import { JSON_RPC, TOKENS, TOKEN_LIST, TokenOption, uniTheme } from '@/utils'
 import { SwapWidget } from '@uniswap/widgets'
 import { Tab } from './tab'
 import { useState } from 'react'
@@ -10,6 +10,7 @@ import {
   Timeline
 } from 'react-ts-tradingview-widgets'
 import { useChainId } from 'wagmi'
+import { SelectToken } from '@/components/common/SelectToken'
 
 type Feature = 'chart' | 'analysis' | 'heatmap' | 'bubble' | 'news'
 const listFeature: Array<Feature> = [
@@ -24,11 +25,13 @@ export const Swap = () => {
   const chainId = useChainId()
 
   const [type, setType] = useState<Feature>('chart')
-  const [crypto, setCrypto] = useState<string>('BTCUSD')
+  const [token, setToken] = useState<TokenOption>(TOKENS[0])
 
   return (
     <section className="">
       <div className="flex w-fit rounded-lg border-4 border-layer bg-layer">
+        <SelectToken token={token} setToken={setToken} />
+
         {listFeature.map((feat) => {
           const pickedStyle = type === feat && 'bg-background'
           return (
@@ -47,7 +50,7 @@ export const Swap = () => {
         <Tab isOpen={type === 'chart'} className="flex">
           <article className="flex-1">
             <AdvancedRealTimeChart
-              symbol={crypto}
+              symbol={token.tradingview}
               theme="dark"
               range="1D"
               calendar={false}
@@ -55,7 +58,7 @@ export const Swap = () => {
               hide_legend={true}
               withdateranges={false}
               autosize
-            ></AdvancedRealTimeChart>
+            />
           </article>
 
           <article className="grid gap-3">
@@ -84,13 +87,13 @@ export const Swap = () => {
 
         <Tab isOpen={type === 'analysis'} className="flex">
           <TechnicalAnalysis
-            symbol={crypto}
+            symbol={token.tradingview}
             colorTheme="dark"
             width="100%"
           ></TechnicalAnalysis>
 
           <FundamentalData
-            symbol={crypto}
+            symbol={token.tradingview}
             colorTheme="dark"
             width="100%"
           ></FundamentalData>

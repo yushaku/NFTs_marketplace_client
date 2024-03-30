@@ -1,7 +1,7 @@
 import { ERC20_ABI } from '@/abi/erc20'
 import { stakeModuleABI } from '@/abi/stakeModule'
 import { Button } from '@/components/common/Button'
-import ModalWarp from '@/components/common/ModalWarper'
+import ModalWarp from '@/components/warper/ModalWarper'
 import { MAX_VALUE, STAKE_ADRESS, TOKEN_GOVERNANCE, cn } from '@/utils'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useState } from 'react'

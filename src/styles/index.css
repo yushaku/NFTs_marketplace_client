@@ -110,8 +110,6 @@
   scrollbar-width: none; /* Firefox */
 }
 
-iframe {
-  .header {
-    display: none;
-  }
+iframe .header {
+  display: none;
 }

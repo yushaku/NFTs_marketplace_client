@@ -1,4 +1,4 @@
-import { Ethereum, BSC, Matic } from '@/components/icons'
+import { ETH, BSC, Matic } from '@/components/icons'
 
 export const shortenAddress = (add: string | undefined) => {
   if (!add) return ''
@@ -10,7 +10,7 @@ export const getNativeToken = (chainId: number) => {
     case 1:
     case 5:
     case 11155111: {
-      return Ethereum
+      return ETH
     }
     case 97: {
       return BSC
