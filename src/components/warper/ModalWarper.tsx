@@ -49,7 +49,7 @@ export default function ModalWarp({
                 <button className="absolute right-5 top-5">
                   <XCircleIcon
                     onClick={handleClose}
-                    className="size-6 fill-accent"
+                    className="size-6 fill-white hover:fill-lighterAccent"
                   />
                 </button>
 

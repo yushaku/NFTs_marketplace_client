@@ -48,7 +48,6 @@ export const StakeForm = ({ isOpen, setOpen, address, balance }: Props) => {
   })
 
   const allowanceData = formatEther(allowance.data ?? 0n)
-  console.log(allowanceData)
 
   const {
     register,

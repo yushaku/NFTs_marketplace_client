@@ -13,6 +13,7 @@ import {
   useWatchContractEvent
 } from 'wagmi'
 import { StakeForm } from './stakeForm'
+import { StakedValueLockChart } from './Chart'
 
 export const Dashboard = () => {
   const { address } = useAccount()
@@ -192,6 +193,8 @@ export const Dashboard = () => {
           )
         })}
       </ul>
+
+      <StakedValueLockChart />
 
       <StakeForm
         isOpen={openModal.stake}

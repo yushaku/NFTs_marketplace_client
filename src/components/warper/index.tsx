@@ -2,4 +2,5 @@
 
 export * from './Dropdown'
 export * from './Card.tsx'
-export * from './ModalWarper.tsx'
+export * from './ModalWarper'
+export * from './Combobox'
