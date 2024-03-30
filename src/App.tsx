@@ -7,6 +7,7 @@ import { NotMatch } from './components/pages/Notmatch'
 import { Swap } from './components/pages/Swap'
 import { Home } from './components/pages/home'
 import { routes } from './utils'
+import { Comming } from './components/pages/Comming'
 
 function App() {
   return (
@@ -17,8 +18,13 @@ function App() {
 
           <Route path={routes.dashboard} element={<Dashboard />} />
           <Route path={routes.trade} element={<Swap />} />
+
           <Route path={routes.nfts} element={<Nfts />} />
           <Route path={`${routes.nfts}/:id`} element={<NftDetail />} />
+
+          <Route path={routes.history} element={<Comming />} />
+          <Route path={routes.vaults} element={<Comming />} />
+          <Route path={routes.bridge} element={<Comming />} />
           <Route path="*" element={<NotMatch />} />
         </Routes>
       </Layout>

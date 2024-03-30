@@ -14,7 +14,7 @@ export const Sidebar = () => {
   const location = useLocation().pathname
 
   return (
-    <section className="h-screen w-72 bg-layer">
+    <section className="z-50 h-screen w-72 bg-layer">
       <Link to="/" className="flex items-center gap-3 p-8">
         <img src={logo} className="size-10" alt="Vite logo" />
         <h3 className="heading-2xl text-lighterAccent">Yushaku</h3>
@@ -23,7 +23,7 @@ export const Sidebar = () => {
       <span className="mx-auto block h-px w-3/5 bg-gray-400/30" />
 
       <ul className="mt-4 space-y-4">
-        {links.map(({ href, title, icon: Icon }) => {
+        {navlinks.map(({ href, title, icon: Icon }) => {
           const pickedStyle = location.includes(href)
             ? 'border-l-accent border-l-4 bg-focus'
             : ''
@@ -45,11 +45,16 @@ export const Sidebar = () => {
   )
 }
 
-const links = [
+const navlinks = [
   {
     icon: HomeIcon,
     title: 'Dashboard',
     href: routes.dashboard
+  },
+  {
+    icon: ArrowPathIcon,
+    title: 'Trade',
+    href: routes.trade
   },
   {
     icon: PhotoIcon,
@@ -59,21 +64,16 @@ const links = [
   {
     icon: BanknotesIcon,
     title: 'Vaults',
-    href: '/vaults'
-  },
-  {
-    icon: ArrowPathIcon,
-    title: 'Trade',
-    href: routes.trade
+    href: routes.vaults
   },
   {
     icon: CalendarIcon,
     title: 'History',
-    href: '/history,'
+    href: routes.history
   },
   {
     icon: PaperClipIcon,
     title: 'Bridge',
-    href: '/bridge,'
+    href: routes.bridge
   }
 ]

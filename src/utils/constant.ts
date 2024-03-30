@@ -13,6 +13,9 @@ export const routes = {
   home: '/',
   trade: '/trade',
   nfts: '/nfts',
+  vaults: '/vaults',
+  history: '/history',
+  bridge: '/bridge',
   dashboard: '/dashboard'
 } as const
 
