@@ -1,7 +1,7 @@
 import { ERC721_ABI } from '@/abi/erc721.ts'
 import { Button } from '@/components/common/Button'
 import { DotLoader } from '@/components/common/Loading'
-import { ETH } from '@/components/icons'
+import { NativeToken } from '@/components/common/NativeTokenBalance'
 import { GATEWAY_URL, fakeNFTs } from '@/utils'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Address } from 'viem'
@@ -45,7 +45,8 @@ export const CollectionNFTs = () => {
               <h3 className="animate absolute -left-1/2 bottom-5 z-50 delay-100 group-hover:left-5">
                 <strong className="mb-2">{item.name}</strong>
                 <p>
-                  Price: {item.price} <ETH className="inline-block size-5" />
+                  Price: {item.price}{' '}
+                  <NativeToken className="inline-block size-5" />
                 </p>
               </h3>
 

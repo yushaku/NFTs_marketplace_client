@@ -1,5 +1,5 @@
 import { Button } from '@/components/common/Button'
-import { ETH } from '@/components/icons'
+import { NativeToken } from '@/components/common/NativeTokenBalance'
 import { Card } from '@/components/warper'
 import { GATEWAY_URL, fakeNFTs } from '@/utils'
 import {
@@ -86,7 +86,7 @@ export const DetailNFT = () => {
             <Fragment>
               <p className="text-sm text-gray-400">Current Price</p>
               <h3 className="my-3 text-2xl font-bold">
-                0.05 <ETH className="inline-block size-5" />
+                0.05 <NativeToken className="inline-block size-5" />
               </h3>
               <p className="flex gap-4">
                 <Button
