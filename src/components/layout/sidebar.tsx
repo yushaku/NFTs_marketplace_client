@@ -6,7 +6,8 @@ import {
   CalendarIcon,
   HomeIcon,
   PaperClipIcon,
-  PhotoIcon
+  PhotoIcon,
+  ShoppingBagIcon
 } from '@heroicons/react/16/solid'
 import { useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
@@ -98,5 +99,10 @@ const navlinks = [
     icon: PaperClipIcon,
     title: 'Bridge',
     href: routes.bridge
+  },
+  {
+    icon: ShoppingBagIcon,
+    title: 'Shop',
+    href: routes.shop
   }
 ]

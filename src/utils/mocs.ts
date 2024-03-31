@@ -56,3 +56,18 @@ export const fakeNFTs = [
     url: 'bafybeigjo7vswkssnmoii6e5rif6srbc7xyqmdvxxlyo37zokst4dnmlka/gun8.mp4'
   }
 ]
+
+export const productsMoc = [
+  {
+    name: 'Black Coral Sea Keyboard',
+    description:
+      'Compatibility: Our keycaps are designed to fit any gaming keyboard with a "+" symbol below the rules or a Cherry MX keyboard. This dongle is not compatible with Razer, Gigabyte, Corsair, Logitech and Steelseries Cannot be used',
+    showImg: '/keyboard1.jpeg',
+    imgs: ['/keyboard1.jpeg', '/keyboard2.jpeg', '/keyboard3.jpeg'],
+    price: {
+      usdt: 100,
+      ysk: 200,
+      bnb: 20
+    }
+  }
+]
