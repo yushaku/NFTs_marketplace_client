@@ -16,9 +16,11 @@ export const routes = {
   vaults: '/vaults',
   history: '/history',
   bridge: '/bridge',
-  dashboard: '/dashboard'
+  dashboard: '/dashboard',
+  shop: '/shop'
 } as const
 
+export const GATEWAY_URL = 'https://ipfs.io/ipfs/'
 export const TOKEN_LIST = 'https://gateway.ipfs.io/ipns/tokens.uniswap.org'
 export const UNI = '0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984'
 export const JSON_RPC_URL = 'https://cloudflare-eth.com'

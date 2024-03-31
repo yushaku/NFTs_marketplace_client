@@ -1,5 +1,5 @@
 import { createConfig, http } from 'wagmi'
-import { goerli, mainnet, polygonMumbai, sepolia } from 'wagmi/chains'
+import { bscTestnet, goerli, mainnet, polygonMumbai } from 'wagmi/chains'
 
 declare module 'wagmi' {
   interface Register {
@@ -9,14 +9,14 @@ declare module 'wagmi' {
 
 export const config = createConfig({
   ssr: true,
-  chains: [mainnet, goerli, polygonMumbai],
+  chains: [mainnet, bscTestnet, goerli, polygonMumbai],
   connectors: [
     // walletConnect({ projectId: env.VITE_WALLET_CONNECT_ID }),
   ],
   transports: {
     [polygonMumbai.id]: http(),
+    [bscTestnet.id]: http(),
     [mainnet.id]: http(),
-    [goerli.id]: http(),
-    [sepolia.id]: http()
+    [goerli.id]: http()
   }
 })

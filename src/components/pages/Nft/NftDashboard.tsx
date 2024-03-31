@@ -14,7 +14,7 @@ export const NftDashboard = () => {
           src={selected.img}
           alt="NFT"
         />
-        <article className="absolute inset-0 w-full bg-gradient-to-t from-[rgba(0,0,0,0.9)] to-[rgba(255,255,255,0.5)]" />
+        <article className="absolute inset-0 w-full bg-gradient-to-t from-[rgba(0,0,0,0.9)] to-[rgba(255,255,255,0.05)]" />
         <article className="absolute bottom-0 left-0 p-10 pb-24">
           <div className="animate translate-y-20 group-hover:translate-y-0">
             <h4 className="text-2xl font-bold">{selected.name}</h4>
@@ -33,7 +33,7 @@ export const NftDashboard = () => {
 
             <Link
               to={`${routes.nfts}/${selected.address}`}
-              className="btn btn-outline flex-start animate opacity-0 delay-300 group-hover:opacity-100"
+              className="btn btn-outline flex-start animate opacity-0 delay-300 group-hover:translate-x-5 group-hover:opacity-100"
             >
               <span>View collection</span>
               <ArrowRightIcon className="size-5" />
@@ -69,20 +69,20 @@ export const NftDashboard = () => {
 
 const collections = [
   {
+    name: 'Gundam Assemble',
+    author: 'Yushaku',
+    address: '0x14a9c99d89106F66C2B86910d2C622Ce0A58C630',
+    authorImg:
+      'https://images.blur.io/_blur-prod/0xbd3531da5cf5857e7cfaa92426877b022e612cf8/7387-2a29cab51c8c73ac?w=64&h=64',
+    img: '/gundams.jpg'
+  },
+  {
     name: 'Pudgy Penguins',
     author: 'PUDGY PENGUINS',
     authorImg:
       'https://images.blur.io/_blur-prod/0xbd3531da5cf5857e7cfaa92426877b022e612cf8/7387-2a29cab51c8c73ac?w=64&h=64',
     address: '0x14a9c99d89106F66C2B86910d2C622Ce0A58C630',
     img: 'https://images.blur.io/_blur-prod/_assets/homepage/covers/bayc-1.png?w=1560&format=png'
-  },
-  {
-    name: 'Pudgy Penguins',
-    author: 'PUDGY PENGUINS',
-    address: '0x14a9c99d89106F66C2B86910d2C622Ce0A58C630',
-    authorImg:
-      'https://images.blur.io/_blur-prod/0xbd3531da5cf5857e7cfaa92426877b022e612cf8/7387-2a29cab51c8c73ac?w=64&h=64',
-    img: 'https://images.blur.io/_blur-prod/_assets/homepage/covers/pudgy-cover2.png?w=1560&format=png'
   },
   {
     name: 'Pudgy Penguins',

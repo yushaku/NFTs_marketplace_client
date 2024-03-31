@@ -5,6 +5,8 @@ import React from 'react'
 type Props = React.ComponentProps<'button'> & {
   loading?: boolean
   variant?: 'filled' | 'outline' | 'standard'
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  icon?: (props: any) => JSX.Element | any
 }
 
 export const Button = ({
@@ -13,6 +15,7 @@ export const Button = ({
   variant = 'filled',
   title,
   loading = false,
+  icon: Icon,
   ...props
 }: Props) => {
   let style = ''
@@ -36,6 +39,7 @@ export const Button = ({
       })}
       {...props}
     >
+      {Icon ? <Icon className="mr-2 inline-block size-5" /> : null}
       {loading ? <DotLoader /> : title}
     </button>
   )

@@ -15,17 +15,17 @@ const queryClient = new QueryClient()
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <WagmiProvider config={config}>
-      <QueryClientProvider client={queryClient}>
-        <ConnectKitProvider customTheme={connectModalStyle}>
-          <ThirdwebProvider
-            activeChain="binance-testnet"
-            clientId={env.VITE_THIRD_WEB}
-          >
+      <ThirdwebProvider
+        activeChain="binance-testnet"
+        clientId={env.VITE_THIRD_WEB}
+      >
+        <QueryClientProvider client={queryClient}>
+          <ConnectKitProvider customTheme={connectModalStyle}>
             <App />
             <ToastContainer />
-          </ThirdwebProvider>
-        </ConnectKitProvider>
-      </QueryClientProvider>
+          </ConnectKitProvider>
+        </QueryClientProvider>
+      </ThirdwebProvider>
     </WagmiProvider>
   </React.StrictMode>
 )

@@ -1,7 +1,7 @@
 import { Menu } from '@headlessui/react'
 import { Fragment } from 'react'
 import { useChainId, useSwitchChain } from 'wagmi'
-import { ETH, Matic } from '../icons'
+import { BSC, ETH, Matic } from '../icons'
 import { cn } from '@/utils'
 import { Dropdown } from '../warper'
 
@@ -60,10 +60,10 @@ const chainList = [
     id: 80001,
     name: 'Mumbai',
     logo: Matic
+  },
+  {
+    id: 97,
+    name: 'BSC Testnet',
+    logo: BSC
   }
-  // {
-  //   id: 97,
-  //   name: 'BSC Testnet',
-  //   logo: BSC
-  // }
 ] as const
