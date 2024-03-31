@@ -37,7 +37,7 @@ const Navbar = () => {
           </li>
         ))}
         <li className="gradient_accent btn z-50">
-          <Link to={routes.trade}>Launch App</Link>
+          <Link to={routes.dashboard}>Launch App</Link>
         </li>
       </ul>
     </header>
@@ -69,7 +69,7 @@ const TopIntro = () => {
         cross-margining for max efficiency.
       </p>
 
-      <Link to={routes.trade} className="gradient_accent btn z-50 mt-10">
+      <Link to={routes.dashboard} className="gradient_accent btn z-50 mt-10">
         Start Trading
       </Link>
 

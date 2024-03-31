@@ -9,7 +9,7 @@ import {
   TechnicalAnalysis,
   Timeline
 } from 'react-ts-tradingview-widgets'
-import { useChainId } from 'wagmi'
+// import { useChainId } from 'wagmi'
 import { SelectToken } from '@/components/common/SelectToken'
 
 type Feature = 'chart' | 'analysis' | 'heatmap' | 'bubble' | 'news'
@@ -22,7 +22,7 @@ const listFeature: Array<Feature> = [
 ]
 
 export const Swap = () => {
-  const chainId = useChainId()
+  // const chainId = useChainId()
 
   const [type, setType] = useState<Feature>('chart')
   const [token, setToken] = useState<TokenOption>(TOKENS[0])
@@ -69,7 +69,7 @@ export const Swap = () => {
               // provider={provider}
               tokenList={TOKEN_LIST}
               jsonRpcUrlMap={JSON_RPC}
-              defaultChainId={chainId}
+              defaultChainId={1}
               // defaultInputAmount="1"
               defaultInputTokenAddress="NATIVE"
               // defaultOutputTokenAddress={UNI}
