@@ -2,7 +2,7 @@ import { ERC721_ABI } from '@/abi/erc721.ts'
 import { Button } from '@/components/common/Button'
 import { DotLoader } from '@/components/common/Loading'
 import { ETH } from '@/components/icons'
-import { GATEWAY_URL } from '@/utils'
+import { GATEWAY_URL, fakeNFTs } from '@/utils'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Address } from 'viem'
 import { useReadContracts } from 'wagmi'
@@ -21,7 +21,6 @@ export const CollectionNFTs = () => {
   })
 
   if (!data || isLoading) return <DotLoader />
-
   const [name, symbol] = data
 
   return (
@@ -31,7 +30,7 @@ export const CollectionNFTs = () => {
       </h4>
 
       <ul className="grid grid-cols-4 gap-x-5 gap-y-10">
-        {fake.map((item, index) => {
+        {fakeNFTs.map((item, index) => {
           return (
             <li
               key={index}
@@ -63,50 +62,3 @@ export const CollectionNFTs = () => {
     </section>
   )
 }
-
-const fake = [
-  {
-    title: 'NFT',
-    name: 'Gudam Unicon',
-    price: 0.05,
-    cip: 0,
-    url: 'bafybeigjo7vswkssnmoii6e5rif6srbc7xyqmdvxxlyo37zokst4dnmlka/gun1.mp4'
-  },
-  {
-    title: 'NFT',
-    name: 'Gudam Unicon',
-    price: 0.05,
-    cip: 0,
-    url: 'bafybeigjo7vswkssnmoii6e5rif6srbc7xyqmdvxxlyo37zokst4dnmlka/gun2.mp4'
-  },
-  {
-    title: 'NFT',
-    name: 'Gudam Unicon',
-    price: 0.05,
-    cip: 0,
-    url: 'bafybeigjo7vswkssnmoii6e5rif6srbc7xyqmdvxxlyo37zokst4dnmlka/gun3.mp4'
-  },
-  {
-    title: 'NFT',
-    name: 'Gudam Unicon',
-    price: 0.08,
-    cip: 0,
-    url: 'bafybeigjo7vswkssnmoii6e5rif6srbc7xyqmdvxxlyo37zokst4dnmlka/gun4.mp4'
-  }
-  // {
-  //   title: 'NFT',
-  //   url: 'bafybeigjo7vswkssnmoii6e5rif6srbc7xyqmdvxxlyo37zokst4dnmlka/gun5.mp4'
-  // },
-  // {
-  //   title: 'NFT',
-  //   url: 'bafybeigjo7vswkssnmoii6e5rif6srbc7xyqmdvxxlyo37zokst4dnmlka/gun6.mp4'
-  // },
-  // {
-  //   title: 'NFT',
-  //   url: 'bafybeigjo7vswkssnmoii6e5rif6srbc7xyqmdvxxlyo37zokst4dnmlka/gun7.mp4'
-  // },
-  // {
-  //   title: 'NFT',
-  //   url: 'bafybeigjo7vswkssnmoii6e5rif6srbc7xyqmdvxxlyo37zokst4dnmlka/gun8.mp4'
-  // }
-]

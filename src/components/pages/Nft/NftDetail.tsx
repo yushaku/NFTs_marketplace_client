@@ -1,8 +1,9 @@
 import { Button } from '@/components/common/Button'
 import { ETH } from '@/components/icons'
 import { Card } from '@/components/warper'
-import { GATEWAY_URL } from '@/utils'
+import { GATEWAY_URL, fakeNFTs } from '@/utils'
 import {
+  ArrowLeftIcon,
   Bars3BottomLeftIcon,
   ClockIcon,
   ShoppingCartIcon,
@@ -10,21 +11,29 @@ import {
 } from '@heroicons/react/16/solid'
 import { AreaChart, Divider } from '@tremor/react'
 import { Fragment } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 export const DetailNFT = () => {
+  const { cip } = useParams()
   const navigate = useNavigate()
+
+  const nft = fakeNFTs[Number(cip ?? 0)]
+
   return (
     <section>
-      <p onClick={() => navigate(-1)} className="text-lg text-gray-100">
-        Camp Cosmos
-      </p>
+      <button
+        onClick={() => navigate(-1)}
+        className="my-5 text-lg text-gray-100 hover:text-accent"
+      >
+        <ArrowLeftIcon className="mr-3 inline-block size-5" />
+        Gundam Collection
+      </button>
 
       <div className="grid grid-cols-2 gap-5">
         <article>
           <Card className="col-span-1 h-1/2">
             <video
-              src={`${GATEWAY_URL}bafybeigjo7vswkssnmoii6e5rif6srbc7xyqmdvxxlyo37zokst4dnmlka/gun1.mp4`}
+              src={`${GATEWAY_URL}${nft.url}`}
               className="size-full"
               autoPlay
               loop
@@ -60,10 +69,14 @@ export const DetailNFT = () => {
 
         <article className="col-span-1">
           <Card>
-            <h3 className="text-2xl text-lighterAccent">Camper #5265</h3>
-            <p className="text-sm text-gray-50">Owned by Rikerbot</p>
+            <h3 className="text-2xl text-lighterAccent">
+              #{nft.cip} - {nft.name}
+            </h3>
+            <p className="text-sm text-gray-50">Owned by Yushaku</p>
             <ul className="mt-5 flex gap-4">
-              <li className="rounded-lg bg-background px-3 py-1"># 2342</li>
+              <li className="rounded-lg bg-background px-3 py-1">
+                # {nft.cip}
+              </li>
               <li className="rounded-lg bg-background px-3 py-1">23 views</li>
               <li className="rounded-lg bg-background px-3 py-1">PFPs</li>
             </ul>
