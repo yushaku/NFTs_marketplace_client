@@ -1,5 +1,4 @@
-import { JSON_RPC, TOKENS, TOKEN_LIST, TokenOption, uniTheme } from '@/utils'
-import { SwapWidget } from '@uniswap/widgets'
+import { TOKENS, TokenOption } from '@/utils'
 import { Tab } from './tab'
 import { useState } from 'react'
 import {
@@ -9,7 +8,6 @@ import {
   TechnicalAnalysis,
   Timeline
 } from 'react-ts-tradingview-widgets'
-// import { useChainId } from 'wagmi'
 import { SelectToken } from '@/components/common/SelectToken'
 
 type Feature = 'chart' | 'analysis' | 'heatmap' | 'bubble' | 'news'
@@ -22,8 +20,6 @@ const listFeature: Array<Feature> = [
 ]
 
 export const Swap = () => {
-  // const chainId = useChainId()
-
   const [type, setType] = useState<Feature>('chart')
   const [token, setToken] = useState<TokenOption>(TOKENS[0])
 
@@ -61,28 +57,27 @@ export const Swap = () => {
             />
           </article>
 
-          <article className="grid gap-3">
-            <SwapWidget
-              theme={uniTheme}
-              onTokenChange={(e) => console.log(JSON.stringify(e))}
-              hideConnectionUI={true}
-              // provider={provider}
-              tokenList={TOKEN_LIST}
-              jsonRpcUrlMap={JSON_RPC}
-              defaultChainId={1}
-              // defaultInputAmount="1"
-              defaultInputTokenAddress="NATIVE"
-              // defaultOutputTokenAddress={UNI}
-            />
+          {/* <article className="grid gap-3"> */}
+          {/* <SwapWidget */}
+          {/*   theme={uniTheme} */}
+          {/*   onTokenChange={(e) => console.log(JSON.stringify(e))} */}
+          {/*   hideConnectionUI={true} */}
+          {/*   tokenList={TOKEN_LIST} */}
+          {/*   jsonRpcUrlMap={JSON_RPC} */}
+          {/*   defaultChainId={1} */}
+          {/*   defaultInputAmount="1" */}
+          {/*   defaultInputTokenAddress="NATIVE" */}
+          {/*   defaultOutputTokenAddress={UNI} */}
+          {/* /> */}
 
-            <Timeline
-              colorTheme="dark"
-              feedMode="market"
-              market="crypto"
-              height={400}
-              width="100%"
-            />
-          </article>
+          {/* <Timeline */}
+          {/*   colorTheme="dark" */}
+          {/*   feedMode="market" */}
+          {/*   market="crypto" */}
+          {/*   height={400} */}
+          {/*   width="100%" */}
+          {/* /> */}
+          {/* </article> */}
         </Tab>
 
         <Tab isOpen={type === 'analysis'} className="flex">
