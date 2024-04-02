@@ -3,7 +3,7 @@ import { stakeModuleABI } from '@/abi/stakeModule.ts'
 import { NativeBalance } from '@/components/common/NativeTokenBalance'
 import { USDT } from '@/components/icons'
 import { Card } from '@/components/warper'
-import { LogTX, STAKE_ADRESS, TOKEN_GOVERNANCE, shortenAddress } from '@/utils'
+import { LogTX, STAKE_ADRESS, YSK_ADDRESS, shortenAddress } from '@/utils'
 import { useState } from 'react'
 import { Address, formatEther } from 'viem'
 import {
@@ -26,7 +26,7 @@ export const Dashboard = () => {
 
   const yskRes = useReadContract({
     abi: ERC20_ABI,
-    address: TOKEN_GOVERNANCE,
+    address: YSK_ADDRESS,
     functionName: 'balanceOf',
     args: [address ?? '0x0']
   })
@@ -39,7 +39,7 @@ export const Dashboard = () => {
   })
 
   useWatchContractEvent({
-    address: TOKEN_GOVERNANCE,
+    address: YSK_ADDRESS,
     abi: ERC20_ABI,
     eventName: 'Transfer',
     onLogs(logs) {

@@ -7,7 +7,9 @@ import {
   HomeIcon,
   PaperClipIcon,
   PhotoIcon,
-  ShoppingBagIcon
+  ScissorsIcon,
+  ShoppingBagIcon,
+  WalletIcon
 } from '@heroicons/react/16/solid'
 import { useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
@@ -45,7 +47,7 @@ export const Sidebar = () => {
       <span className="mx-auto block h-px w-3/5 bg-gray-400/30" />
 
       <ul className="mt-4 space-y-4">
-        {navlinks.map(({ href, title, icon: Icon }) => {
+        {navlinks.map(({ href, title, icon: Icon, childrens }) => {
           const pickedStyle = location.includes(href)
             ? 'border-l-accent border-l-4 bg-focus'
             : ''
@@ -61,6 +63,24 @@ export const Sidebar = () => {
                   {title}
                 </span>
               </NavLink>
+
+              {childrens && pickedStyle && (
+                <ol>
+                  {childrens.map(({ title, href, icon: SecondIcon }) => {
+                    return (
+                      <li key={href} className="group w-full">
+                        <NavLink
+                          className={`${pickedStyle} ${isSmall ? 'px-4' : 'px-16'} flex gap-3 py-4 group-hover:text-accent`}
+                          to={href}
+                        >
+                          <SecondIcon className="size-6 group-hover:fill-accent" />
+                          {title}
+                        </NavLink>
+                      </li>
+                    )
+                  })}
+                </ol>
+              )}
             </li>
           )
         })}
@@ -83,7 +103,19 @@ const navlinks = [
   {
     icon: PhotoIcon,
     title: 'NFTs',
-    href: routes.nfts
+    href: routes.nfts,
+    childrens: [
+      {
+        icon: WalletIcon,
+        title: 'My NFTs',
+        href: routes.myNFTs
+      },
+      {
+        icon: ScissorsIcon,
+        title: 'Create NFT',
+        href: routes.nftStudio
+      }
+    ]
   },
   {
     icon: BanknotesIcon,
