@@ -23,12 +23,12 @@ export const NftDashboard = () => {
 
           <div className="animate mt-6 flex items-center gap-5 opacity-0 delay-150 group-hover:opacity-100">
             <p>
-              <p className="text-xs text-gray-300">FLOOR PRICE</p>
-              <p>4.15 ETH</p>
+              <span className="text-xs text-gray-300">FLOOR PRICE</span>
+              <span>4.15 ETH</span>
             </p>
             <p>
-              <p className="text-xs text-gray-300">1D VOLUME</p>
-              <p>49.15 ETH</p>
+              <span className="text-xs text-gray-300">1D VOLUME</span>
+              <span>49.15 ETH</span>
             </p>
 
             <Link
@@ -68,14 +68,6 @@ export const NftDashboard = () => {
 }
 
 const collections = [
-  {
-    name: 'Gundam Assemble',
-    author: 'Yushaku',
-    address: '0x14a9c99d89106F66C2B86910d2C622Ce0A58C630',
-    authorImg:
-      'https://images.blur.io/_blur-prod/0xbd3531da5cf5857e7cfaa92426877b022e612cf8/7387-2a29cab51c8c73ac?w=64&h=64',
-    img: '/gundams.jpg'
-  },
   {
     name: 'Pudgy Penguins',
     author: 'PUDGY PENGUINS',

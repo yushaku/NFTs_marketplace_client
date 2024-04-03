@@ -1,23 +1,25 @@
-import { Button } from '@/components/common/Button'
+import { DotLoader } from '@/components/common/Loading'
 import { NativeToken } from '@/components/common/NativeTokenBalance'
-import { Card } from '@/components/warper'
-import { GATEWAY_URL, chartdata, fakeNFTs } from '@/utils'
+import { Nftmedia } from '@/components/common/nfts/Nftmedia'
+import { chartdata } from '@/utils'
 import {
   ArrowLeftIcon,
-  Bars3BottomLeftIcon,
-  ClockIcon,
   ShoppingCartIcon,
-  TagIcon
+  TagIcon,
+  ClockIcon,
+  Bars3BottomLeftIcon
 } from '@heroicons/react/16/solid'
-import { AreaChart, Divider } from '@tremor/react'
-import { Fragment } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useContract, useNFT } from '@thirdweb-dev/react'
+import { Card, Button, Divider, AreaChart } from '@tremor/react'
+import { useParams, useNavigate } from 'react-router-dom'
+import { Fragment } from 'react/jsx-runtime'
 
-export const DetailNFT = () => {
-  const { cip } = useParams()
+export const UserNftDetail = () => {
+  const { cip: tokenId, id: nftAddress } = useParams()
   const navigate = useNavigate()
 
-  const nft = fakeNFTs[Number(cip ?? 0)]
+  const { contract: nftCollection } = useContract(nftAddress)
+  const { data: nft } = useNFT(nftCollection, tokenId)
 
   return (
     <section>
@@ -32,37 +34,25 @@ export const DetailNFT = () => {
       <div className="grid grid-cols-2 gap-5">
         <article>
           <Card className="col-span-1 h-1/2">
-            <video
-              src={`${GATEWAY_URL}${nft.url}`}
-              className="size-full"
-              autoPlay
-              loop
-              muted
-            />
+            <Nftmedia metadata={nft?.metadata} isOn={true} />
           </Card>
 
           <Card className="mt-5">
             <h3 className="text-2xl">Description</h3>
-            <p className="text-sm text-gray-300">
-              Alyxandra's fierce independence, resourcefulness, mental acuity
-              and raw talent make her both a natural leader and a lone wolf. She
-              struggles against societal norms, relishes the freedoms of
-              mercenary life, and fights for her family. She is ambitious beyond
-              measure.
-            </p>
+            <p className="text-sm text-gray-300">{nft?.metadata.description}</p>
           </Card>
 
           <Card className="mt-5">
             <h3 className="text-2xl">Detail</h3>
             <ul className="mt-5 text-sm text-gray-300">
-              {nftDetail.map((it, index) => {
-                return (
-                  <li className="flex justify-between" key={index}>
-                    <span className="text-gray-300">{it.type}</span>
-                    <span>{it.value}</span>
-                  </li>
-                )
-              })}
+              {/* {nftDetail.map((it, index) => { */}
+              {/*   return ( */}
+              {/*     <li className="flex justify-between" key={index}> */}
+              {/*       <span className="text-gray-300">{it.type}</span> */}
+              {/*       <span>{it.value}</span> */}
+              {/*     </li> */}
+              {/*   ) */}
+              {/* })} */}
             </ul>
           </Card>
         </article>
@@ -70,12 +60,12 @@ export const DetailNFT = () => {
         <article className="col-span-1">
           <Card>
             <h3 className="text-2xl text-lighterAccent">
-              #{nft.cip} - {nft.name}
+              {nft?.metadata.name ?? <DotLoader />}
             </h3>
             <p className="text-sm text-gray-50">Owned by Yushaku</p>
             <ul className="mt-5 flex gap-4">
               <li className="rounded-lg bg-background px-3 py-1">
-                # {nft.cip}
+                # {tokenId}
               </li>
               <li className="rounded-lg bg-background px-3 py-1">23 views</li>
               <li className="rounded-lg bg-background px-3 py-1">PFPs</li>
@@ -183,26 +173,3 @@ export const DetailNFT = () => {
     </section>
   )
 }
-
-const nftDetail = [
-  {
-    type: 'Contract Address',
-    value: '0x000000000000000'
-  },
-  {
-    type: 'Token ID',
-    value: '1'
-  },
-  {
-    type: 'Token Standard',
-    value: 'ERC 721'
-  },
-  {
-    type: 'last update',
-    value: '1 year ago'
-  },
-  {
-    type: 'Creator Earning',
-    value: '5%'
-  }
-]

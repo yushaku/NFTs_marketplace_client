@@ -71,3 +71,26 @@ export const productsMoc = [
     }
   }
 ]
+
+export const chartdata = [
+  {
+    date: 'Jan 22',
+    ETH: 0.03
+  },
+  {
+    date: 'Feb 22',
+    ETH: 0.04
+  },
+  {
+    date: 'Mar 22',
+    ETH: 0.02
+  },
+  {
+    date: 'Apr 22',
+    ETH: 0.08
+  },
+  {
+    date: 'May 22',
+    ETH: 0.1
+  }
+]

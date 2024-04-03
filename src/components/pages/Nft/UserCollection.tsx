@@ -1,27 +1,23 @@
-import { NFT_ADRESS } from '@/utils'
-import { useContract, useOwnedNFTs } from '@thirdweb-dev/react'
-import { useAccount } from 'wagmi'
-import NFTGrid from './NFTGrid'
+import { Input } from '@/components/common/Input'
+import { NFT_ADRESS, routes } from '@/utils'
+import { Link } from 'react-router-dom'
 
 export const UserCollection = () => {
-  const { address } = useAccount()
-  const { contract: nftCollection } = useContract(NFT_ADRESS)
-
-  const { data: ownedNfts, isLoading: loadingOwnedNfts } = useOwnedNFTs(
-    nftCollection,
-    address
-  )
-
   return (
-    <div>
-      <h3>UserCollection</h3>
-      <p>Browse and manage your NFTs from this collection.</p>
+    <div className="flex gap-20">
+      <article className="w-1/2">
+        <h3 className="mt-10 text-lg">Import your collection address here</h3>
+        <Input className="mt-5 w-1/2" />
+      </article>
 
-      <NFTGrid
-        data={ownedNfts}
-        isLoading={loadingOwnedNfts}
-        emptyText={"You don't own any NFTs yet from this collection."}
-      />
+      <article className="w-1/2">
+        <h3 className="mt-10 text-lg">Your collection</h3>
+        <ul className="mt-5">
+          <li className="text-lighterAccent">
+            <Link to={`${routes.myNFTs}/${NFT_ADRESS}`}>collection 1</Link>
+          </li>
+        </ul>
+      </article>
     </div>
   )
 }
