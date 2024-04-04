@@ -1,6 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Button } from '@/components/common/Button'
 import { DotLoader } from '@/components/common/Loading'
 import { NativeToken } from '@/components/common/NativeTokenBalance'
 import { Nftmedia } from '@/components/common/nfts/Nftmedia'
+import { Card } from '@/components/warper'
 import { chartdata } from '@/utils'
 import {
   ArrowLeftIcon,
@@ -10,7 +13,7 @@ import {
   Bars3BottomLeftIcon
 } from '@heroicons/react/16/solid'
 import { useContract, useNFT } from '@thirdweb-dev/react'
-import { Card, Button, Divider, AreaChart } from '@tremor/react'
+import { Divider, AreaChart } from '@tremor/react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { Fragment } from 'react/jsx-runtime'
 
@@ -34,7 +37,7 @@ export const UserNftDetail = () => {
       <div className="grid grid-cols-2 gap-5">
         <article>
           <Card className="col-span-1 h-1/2">
-            <Nftmedia metadata={nft?.metadata} isOn={true} />
+            <Nftmedia metadata={nft?.metadata as any} isOn={true} />
           </Card>
 
           <Card className="mt-5">
