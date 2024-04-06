@@ -7,7 +7,10 @@ export const env = cleanEnv(import.meta.env, {
   VITE_INFURA_KEY: str(),
   VITE_THIRD_WEB: str(),
   VITE_THIRD_WEB_SECRET: str(),
-  VITE_OWNER_ADDRESS: str()
+  VITE_OWNER_ADDRESS: str(),
+  VITE_GRAPHQL_CMS_ENDPOINT: str(),
+  VITE_GRAPHQL_CMS_ASSET: str(),
+  VITE_GRAPHQL_CMS_TOKEN: str()
 })
 
 export const routes = {

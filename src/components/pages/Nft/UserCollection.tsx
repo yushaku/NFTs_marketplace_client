@@ -1,33 +1,66 @@
+import { ERC721_ABI } from '@/abi/erc721'
 import { Button } from '@/components/common/Button'
 import { Input } from '@/components/common/Input'
-import { NFT_ADRESS, routes } from '@/utils'
+import { DotLoader } from '@/components/common/Loading'
+import { useCollector } from '@/hooks/useCollector'
+import { useGetCollections, useInportCollection } from '@/hooks/useNfts'
+import { cn, publicClient, routes } from '@/utils'
 import { shortenAddress } from '@thirdweb-dev/react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { isAddress } from 'viem'
+import { useAccount, useChainId } from 'wagmi'
 
 export const UserCollection = () => {
+  const chainId = useChainId()
+  const [skeleton, setSkeleton] = useState({
+    address: '',
+    name: '',
+    loading: false
+  })
+
+  const { address } = useAccount()
+  const { data: collector } = useCollector(address)
+  const { data: collections } = useGetCollections(address, chainId)
+
   return (
     <section className="min-h-[85%]">
-      <div className="mt-10 grid grid-cols-5 gap-5">
-        <article className="h-52 rounded-lg bg-layer p-3">
-          <h3 className="text-lg">Import your collection</h3>
-          <Input placeholder="Enter address" className="mt-5" />
-          <Button title="Import" className="mt-5 w-full" />
+      <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-3 xl:grid-cols-5">
+        <FormImport
+          className="col-span-2"
+          userId={collector?.collector.id}
+          whenSubmit={({ address, name }) =>
+            setSkeleton({ address, name, loading: true })
+          }
+          onSuccess={() => setSkeleton({ ...skeleton, loading: false })}
+        />
+
+        <article
+          hidden={skeleton.loading}
+          className={`${skeleton.loading ? 'block' : 'hidden'} relative h-52 w-full animate-pulse overflow-hidden rounded-lg bg-layer`}
+        >
+          <h3 className="absolute bottom-3 z-50 bg-gray-500/50 p-3 text-lg">
+            {skeleton.name} -
+            <span className="ml-3">{shortenAddress(skeleton.address)}</span>
+          </h3>
+          <DotLoader className="absolute right-1/2 top-1/2 z-10  translate-x-1/2" />
         </article>
 
-        {nfts.map((nft) => {
+        {collections?.collections.map((nft) => {
           return (
             <Link
               to={`${routes.myNFTs}/${nft.address}`}
               key={nft.address}
-              className="h-52 w-full rounded-lg bg-layer p-3"
+              className="relative h-52 w-full overflow-hidden rounded-lg bg-layer"
             >
-              <h3 className="text-lg">
-                {nft.name}
-                <span className="ml-5 text-gray-500">
-                  {shortenAddress(nft.address)}
-                </span>
+              <h3 className="absolute bottom-3 z-50 bg-gray-500/50 p-3 text-lg">
+                {nft.name} -
+                <span className="ml-3">{shortenAddress(nft.address)}</span>
               </h3>
-              <img src={nft.img} className="size-full" />
+              <img
+                src="/gundams.jpg"
+                className="animate size-full hover:scale-110"
+              />
             </Link>
           )
         })}
@@ -36,15 +69,66 @@ export const UserCollection = () => {
   )
 }
 
-const nfts = [
-  {
-    address: NFT_ADRESS,
-    name: 'NFT 1',
-    img: '/img.svg'
-  },
-  {
-    address: NFT_ADRESS,
-    name: 'NFT 2',
-    img: '/img.svg'
+type Props = React.FormHTMLAttributes<HTMLFormElement> & {
+  userId?: string
+  whenSubmit: ({ address, name }: { address: string; name: string }) => void
+  onSuccess: () => void
+}
+
+const FormImport = ({
+  userId = '',
+  whenSubmit,
+  onSuccess,
+  className
+}: Props) => {
+  const chainId = useChainId()
+  const [address, setAddress] = useState('0x')
+  const [error, setError] = useState('')
+  const { mutateAsync: importCollection, isPending } = useInportCollection()
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+
+    if (isAddress(address)) {
+      const name = await publicClient.readContract({
+        address,
+        abi: ERC721_ABI,
+        functionName: 'name'
+      })
+
+      if (!name) {
+        setError('This collection is not supported')
+      }
+
+      whenSubmit({ address, name })
+      await importCollection({ address, name, userId, chainId })
+      onSuccess()
+      setAddress('0x')
+    } else {
+      setError('Hey! this is not an valid address')
+    }
   }
-]
+
+  return (
+    <form
+      onSubmit={handleSubmit}
+      className={cn('h-52 rounded-lg bg-layer p-3', className)}
+    >
+      <h3 className="text-lg">Import your collection</h3>
+      <Input
+        value={address}
+        onChange={(e) => setAddress(e.target.value)}
+        placeholder="Enter address"
+        className={`mt-5 ${error && 'border-red-500'}`}
+      />
+      <span className="mt-2 text-sm text-red-500">{error}</span>
+      <Button
+        loading={isPending}
+        disabled={isPending || !userId}
+        type="submit"
+        title="Import"
+        className="mt-5 w-full"
+      />
+    </form>
+  )
+}

@@ -21,11 +21,11 @@ export const Spinner = () => {
   )
 }
 
-export const DotLoader = () => {
+export const DotLoader = (props: React.HTMLAttributes<HTMLDivElement>) => {
   const style = 'h-2.5 w-2.5 bg-focus rounded-full'
 
   return (
-    <div className="flex">
+    <div className={cn('flex', props.className)}>
       <div className={`${style} mr-1 animate-bounce`}></div>
       <div className={`${style} mr-1 animate-bounce200`}></div>
       <div className={`${style} animate-bounce400`}></div>

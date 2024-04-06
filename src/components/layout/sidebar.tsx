@@ -74,7 +74,9 @@ export const Sidebar = () => {
                           to={href}
                         >
                           <SecondIcon className="size-6 group-hover:fill-accent" />
-                          {title}
+                          <span className={`${isSmall ? 'hidden' : 'block'}`}>
+                            {title}
+                          </span>
                         </NavLink>
                       </li>
                     )

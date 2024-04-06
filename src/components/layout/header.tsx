@@ -14,11 +14,11 @@ export const Header = ({ theme, switchTheme }: Props) => {
   const title = headTitle[location as keyof typeof headTitle] ?? 'Home'
 
   return (
-    <header className="mt-5 flex justify-between py-5">
-      <h3 className="heading-2xl text-lighterAccent">{title}</h3>
+    <header className="mt-5 flex items-center justify-between py-5">
+      <h3 className="heading-lg lg:heading-2xl text-lighterAccent">{title}</h3>
 
       <div className="flex-center gap-3">
-        <button className="p-3" onClick={switchTheme}>
+        <button className="hidden p-3 md:block" onClick={switchTheme}>
           {theme === 'light' ? (
             <SunIcon className="size-6 fill-accent" />
           ) : (
@@ -26,7 +26,9 @@ export const Header = ({ theme, switchTheme }: Props) => {
           )}
         </button>
 
-        <SelectChain />
+        <span className="hidden md:block">
+          <SelectChain />
+        </span>
         <WalletButton />
       </div>
     </header>

@@ -20,6 +20,8 @@
     "@uniswap/widgets": "^2.59.0",
     "connectkit": "^1.7.2",
     "envalid": "^8.0.0",
+    "graphql": "^16.8.1",
+    "graphql-request": "^6.1.0",
     "react": "^18.2.0",
     "react-countup": "^6.5.0",
     "react-dom": "^18.2.0",
