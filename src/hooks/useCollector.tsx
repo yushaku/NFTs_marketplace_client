@@ -1,6 +1,5 @@
-import { Collection } from '@/types'
 import { graphQLClient } from '@/utils/gqlClient'
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { gql } from 'graphql-request'
 
 const PROMPT_PATH = '/collector'
@@ -26,4 +25,32 @@ export const useCollector = (address: string | undefined) => {
       `)
     }
   })
+}
+
+type User = {
+  address: string
+  name: string
+}
+
+export const useCreateCollector = () => {
+  return useMutation({
+    mutationFn: checkUser
+  })
+}
+
+export async function checkUser(data: Partial<User>) {
+  const { address } = data
+  return graphQLClient.request(gql`
+    mutation upsertCollector {
+      upsertCollector(
+        upsert: {
+          create: { address: "${address}" }
+          update: { address: "${address}" }
+        }
+        where: { address: "${address}" }
+      ) {
+        id
+      }
+    }
+  `)
 }

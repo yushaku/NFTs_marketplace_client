@@ -7,6 +7,7 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { WagmiProvider } from 'wagmi'
 import App from './App.tsx'
+import { checkUser } from './hooks'
 import './styles/index.css'
 import { config, connectModalStyle, env } from './utils'
 
@@ -20,7 +21,10 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         clientId={env.VITE_THIRD_WEB}
       >
         <QueryClientProvider client={queryClient}>
-          <ConnectKitProvider customTheme={connectModalStyle}>
+          <ConnectKitProvider
+            onConnect={({ address }) => checkUser({ address })}
+            customTheme={connectModalStyle}
+          >
             <App />
             <ToastContainer />
           </ConnectKitProvider>
