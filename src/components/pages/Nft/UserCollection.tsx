@@ -2,7 +2,6 @@ import { ERC721_ABI } from '@/abi/erc721'
 import { Button } from '@/components/common/Button'
 import { Input } from '@/components/common/Input'
 import { DotLoader } from '@/components/common/Loading'
-import { useCollector } from '@/hooks/useCollector'
 import { useGetCollections, useInportCollection } from '@/hooks/useNfts'
 import { cn, publicClient, routes } from '@/utils'
 import { shortenAddress } from '@thirdweb-dev/react'
@@ -20,7 +19,8 @@ export const UserCollection = () => {
   })
 
   const { address } = useAccount()
-  const { data: collector } = useCollector(address)
+  // const { data: collector } = useCollector(address)
+  const { address: userAddress } = useAccount()
   const { data: collections } = useGetCollections(address, chainId)
 
   return (
@@ -28,7 +28,7 @@ export const UserCollection = () => {
       <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-3 xl:grid-cols-5">
         <FormImport
           className="col-span-2"
-          userId={collector?.collector.id}
+          userAddress={userAddress}
           whenSubmit={({ address, name }) =>
             setSkeleton({ address, name, loading: true })
           }
@@ -70,13 +70,13 @@ export const UserCollection = () => {
 }
 
 type Props = React.FormHTMLAttributes<HTMLFormElement> & {
-  userId?: string
+  userAddress?: string
   whenSubmit: ({ address, name }: { address: string; name: string }) => void
   onSuccess: () => void
 }
 
 const FormImport = ({
-  userId = '',
+  userAddress = '',
   whenSubmit,
   onSuccess,
   className
@@ -101,7 +101,7 @@ const FormImport = ({
       }
 
       whenSubmit({ address, name })
-      await importCollection({ address, name, userId, chainId })
+      await importCollection({ address, name, userAddress, chainId })
       onSuccess()
       setAddress('0x')
     } else {

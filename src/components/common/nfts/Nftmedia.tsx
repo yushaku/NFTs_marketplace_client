@@ -11,11 +11,6 @@ export const Nftmedia = ({ metadata, isOn }: Props) => {
 
   if (!metadata || !type) return <span />
 
-  console.log({
-    url,
-    type
-  })
-
   switch (type) {
     case 'mp4':
       return (

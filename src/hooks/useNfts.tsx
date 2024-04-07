@@ -34,13 +34,13 @@ export const useGetCollections = (address?: string, chainId?: number) => {
 type ImportCollection = {
   name: string
   address: string
-  chainId: number
-  userId: string
+  chainId?: number
+  userAddress?: `0x${string}`
 }
 export const useInportCollection = () => {
   return useMutation({
     mutationFn: async (data: ImportCollection) => {
-      const { name, address, chainId, userId } = data
+      const { name, address, chainId = 97, userAddress } = data
       return graphQLClient.request(gql`
         mutation importCollection {
           createCollection(
@@ -50,7 +50,7 @@ export const useInportCollection = () => {
               name: "${name}"
               collectors: {
                 connect: {
-                  id: "${userId}"
+                  address: "${userAddress}"
                 }
               }
             }

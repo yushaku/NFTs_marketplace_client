@@ -54,5 +54,6 @@ const headTitle = {
   [routes.trade]: 'Trade',
   [routes.history]: 'History',
   [routes.nfts]: 'NFTs Marketplace',
+  [routes.nftStudio]: 'NFTs Studio',
   [routes.myNFTs]: 'Your NFTs Collection'
 }

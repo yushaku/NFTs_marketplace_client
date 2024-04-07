@@ -4,25 +4,51 @@ import { DotLoader } from '@/components/common/Loading'
 import { NativeToken } from '@/components/common/NativeTokenBalance'
 import { Nftmedia } from '@/components/common/nfts/Nftmedia'
 import { Card } from '@/components/warper'
-import { chartdata } from '@/utils'
+import { MARKETPLACE_ADDRESS, NFT_ADRESS, chartdata, cn } from '@/utils'
 import {
   ArrowLeftIcon,
+  Bars3BottomLeftIcon,
+  ClockIcon,
   ShoppingCartIcon,
   TagIcon,
-  ClockIcon,
-  Bars3BottomLeftIcon
+  XMarkIcon
 } from '@heroicons/react/16/solid'
-import { useContract, useNFT } from '@thirdweb-dev/react'
-import { Divider, AreaChart } from '@tremor/react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { yupResolver } from '@hookform/resolvers/yup'
+import {
+  useContract,
+  useCreateDirectListing,
+  useNFT,
+  useValidDirectListings
+} from '@thirdweb-dev/react'
+import { AreaChart, Divider } from '@tremor/react'
+import { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { useNavigate, useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { Fragment } from 'react/jsx-runtime'
+import { useAccount } from 'wagmi'
+import * as yup from 'yup'
 
 export const UserNftDetail = () => {
   const { cip: tokenId, id: nftAddress } = useParams()
+  const { address: userAddress } = useAccount()
+  const [isOpenForm, setIsOpenForm] = useState(false)
   const navigate = useNavigate()
 
   const { contract: nftCollection } = useContract(nftAddress)
   const { data: nft } = useNFT(nftCollection, tokenId)
+
+  async function checkOwner() {
+    const owner = await nftCollection?.call('ownerOf', [tokenId])
+    if (owner !== userAddress) {
+      navigate(`nfts/${nftAddress}/${tokenId}/`)
+    }
+  }
+
+  useEffect(() => {
+    checkOwner()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <section>
@@ -77,18 +103,23 @@ export const UserNftDetail = () => {
 
           <Card className="mt-5">
             <Fragment>
-              <p className="text-sm text-gray-400">Current Price</p>
-              <h3 className="my-3 text-2xl font-bold">
-                0.05 <NativeToken className="inline-block size-5" />
-              </h3>
+              {/* <p className="text-sm text-gray-400">Current Price</p> */}
+              {/* <h3 className="my-3 text-2xl font-bold"> */}
+              {/*   0.05 <NativeToken className="inline-block size-5" /> */}
+              {/* </h3> */}
               <p className="flex gap-4">
                 <Button
-                  icon={ShoppingCartIcon}
-                  title="Buy now"
-                  className="w-1/2"
+                  onClick={() => setIsOpenForm(!isOpenForm)}
+                  icon={isOpenForm ? XMarkIcon : ShoppingCartIcon}
+                  title={isOpenForm ? 'Close' : 'List For Sale'}
+                  className={isOpenForm ? 'bg-background px-5' : 'w-full'}
                 />
-                <Button icon={TagIcon} title="Make Offer" className="w-1/2" />
               </p>
+
+              <ListNftForm
+                className={`${isOpenForm ? 'block' : 'hidden'} mt-5`}
+                userAddress={userAddress}
+              />
 
               <Divider className="border-gray-700">History</Divider>
 
@@ -174,5 +205,100 @@ export const UserNftDetail = () => {
 
       <div></div>
     </section>
+  )
+}
+
+type Props = React.FormHTMLAttributes<HTMLFormElement> & {
+  whenSubmit?: () => void
+  userAddress?: `0x${string}`
+}
+
+type Inputs = {
+  amount: number
+}
+
+const schema = yup
+  .object({
+    amount: yup.number().positive().required()
+  })
+  .required()
+
+const ListNftForm = ({ className, userAddress }: Props) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<Inputs>({ resolver: yupResolver(schema) })
+
+  const { contract: marketplace, isLoading: loadingMarketplace } = useContract(
+    MARKETPLACE_ADDRESS,
+    'marketplace-v3'
+  )
+
+  const { contract: nftCollection } = useContract(NFT_ADRESS)
+  const { mutateAsync: listMarket } = useCreateDirectListing(marketplace)
+
+  // const { data: directListing, isLoading: loadingDirectListing } =
+  //   useValidDirectListings(marketplace, {
+  //     tokenContract: NFT_ADRESS,
+  //     tokenId: 1
+  //   })
+
+  async function checkAndProvideApproval() {
+    const hasApproval = await nftCollection?.call('isApprovedForAll', [
+      userAddress,
+      MARKETPLACE_ADDRESS
+    ])
+
+    if (!hasApproval) {
+      const txResult = await nftCollection?.call('setApprovalForAll', [
+        MARKETPLACE_ADDRESS,
+        true
+      ])
+
+      if (txResult) {
+        toast.success('Approval provided')
+      }
+    }
+    return true
+  }
+
+  async function onSubmit(data: Inputs) {
+    const { amount } = data
+
+    await checkAndProvideApproval()
+    const txResult = await listMarket({
+      assetContractAddress: data.nftContractAddress,
+      tokenId: data.tokenId,
+      pricePerToken: amount,
+      startTimestamp: new Date(data.startDate),
+      endTimestamp: new Date(data.endDate)
+    })
+
+    return txResult
+  }
+
+  return (
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className={cn('h-52 rounded-lg bg-layer p-3', className)}
+    >
+      <h3 className="my-2 text-lg">
+        what is the price? <NativeToken />
+      </h3>
+      <input
+        type="text"
+        placeholder="Amount"
+        className={cn(
+          'w-full rounded-lg border-2 border-gray-700 bg-layer p-3  focus:border-gray-500 focus:outline-none',
+          { 'border-red-400': errors.amount?.message }
+        )}
+        {...register('amount', { required: true })}
+      />
+      <span className="mt-2 text-sm text-red-500">
+        {errors?.amount?.message ?? ''}
+      </span>
+      <Button type="submit" title="List for sale" className="mt-5 w-full" />
+    </form>
   )
 }

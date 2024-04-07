@@ -21,7 +21,7 @@ export const Button = ({
   let style = ''
   switch (variant) {
     case 'filled':
-      style = 'bg-accent hover:bg-accent/90'
+      style = 'bg-accent hover:bg-lighterAccent'
       break
     case 'outline':
       style = 'border border-gray-600 bg-layer hover:bg-focus'
