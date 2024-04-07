@@ -48,9 +48,9 @@ export const Sidebar = () => {
 
       <ul className="mt-4 space-y-4">
         {navlinks.map(({ href, title, icon: Icon, childrens }) => {
-          const pickedStyle = location.includes(href)
-            ? 'border-l-accent border-l-4 bg-focus'
-            : ''
+          const pickedStyle =
+            location === href ? 'border-l-accent border-l-4 bg-focus' : ''
+          const isOpen = location.includes(href)
 
           return (
             <li key={href}>
@@ -64,9 +64,13 @@ export const Sidebar = () => {
                 </span>
               </NavLink>
 
-              {childrens && pickedStyle && (
+              {childrens && isOpen && (
                 <ol>
                   {childrens.map(({ title, href, icon: SecondIcon }) => {
+                    const pickedStyle = location.includes(href)
+                      ? 'border-l-accent border-l-4 bg-focus'
+                      : ''
+
                     return (
                       <li key={href} className="group w-full">
                         <NavLink

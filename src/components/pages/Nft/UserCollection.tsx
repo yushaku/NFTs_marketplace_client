@@ -70,13 +70,13 @@ export const UserCollection = () => {
 }
 
 type Props = React.FormHTMLAttributes<HTMLFormElement> & {
-  userAddress?: string
+  userAddress?: `0x${string}`
   whenSubmit: ({ address, name }: { address: string; name: string }) => void
   onSuccess: () => void
 }
 
 const FormImport = ({
-  userAddress = '',
+  userAddress = '0x0',
   whenSubmit,
   onSuccess,
   className
@@ -124,7 +124,7 @@ const FormImport = ({
       <span className="mt-2 text-sm text-red-500">{error}</span>
       <Button
         loading={isPending}
-        disabled={isPending || !userId}
+        disabled={isPending || !userAddress}
         type="submit"
         title="Import"
         className="mt-5 w-full"

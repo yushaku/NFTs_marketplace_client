@@ -18,6 +18,7 @@ export const routes = {
   nfts: '/nfts',
   myNFTs: '/nfts/my-collection',
   nftStudio: '/nfts/studio',
+  nftLaunchpad: '/nfts/launchpad',
   vaults: '/vaults',
   history: '/history',
   bridge: '/bridge',
