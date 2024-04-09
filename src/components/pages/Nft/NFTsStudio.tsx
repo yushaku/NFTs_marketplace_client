@@ -32,7 +32,7 @@ export const NFTsStudio = () => {
         })}
       </div>
 
-      {type === 'create_nft' && <CreateNftTab />}
+      {type === 'create_nft' && <CreateNftTab collectionAddress={collection} />}
       {type === 'create_collection' && <CreateCollectionTab />}
     </section>
   )

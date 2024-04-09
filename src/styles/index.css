@@ -113,3 +113,15 @@
 iframe .header {
   display: none;
 }
+
+.parallax-effect {
+  transform-style: preserve-3d;
+
+  .inner-img {
+    transform: translateZ(360px);
+  }
+
+  .inner-text {
+    transform: translateZ(100px);
+  }
+}
