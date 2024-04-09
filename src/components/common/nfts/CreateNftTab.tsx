@@ -1,7 +1,8 @@
 import { Button } from '@/components/common/Button'
+import Tilt from 'react-parallax-tilt'
 import { cn } from '@/utils'
 import { TrashIcon } from '@heroicons/react/16/solid'
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 type Inputs = {
@@ -24,6 +25,7 @@ export const CreateNftTab = () => {
 
   const {
     register,
+    getValues,
     handleSubmit,
     formState: { errors }
   } = useForm<Inputs>()
@@ -39,7 +41,7 @@ export const CreateNftTab = () => {
   }
 
   return (
-    <div className="flex gap-10">
+    <div className="mt-10 flex gap-10">
       <form
         className="mt-5 flex flex-col gap-5"
         onSubmit={handleSubmit(onSubmit)}
@@ -115,17 +117,53 @@ export const CreateNftTab = () => {
         </label>
         <Button
           onClick={() => {
-            setProperties([...properties, property])
-            setProperty({ trait: '', value: '' })
+            if (property.trait && property.value) {
+              setProperties([...properties, property])
+              setProperty({ trait: '', value: '' })
+            }
           }}
           title="Add more"
           className="w-1/2"
         />
       </form>
 
-      <article className="flex-1">
-        {media && <img src={URL.createObjectURL(media)} className="size-4/5" />}
-      </article>
+      <div className="flex-center flex-1">
+        <Tilt
+          tiltMaxAngleX={5}
+          tiltMaxAngleY={5}
+          glareEnable
+          glareMaxOpacity={0.5}
+          scale={1.2}
+          perspective={1000}
+        >
+          <article className="h-fit w-[300px] cursor-grab rounded-lg bg-layer p-6 hover:shadow">
+            {media && <Media media={media} />}
+            <h3 className="mt-5 text-xl font-bold">{getValues('name')}</h3>
+          </article>
+        </Tilt>
+      </div>
     </div>
   )
 }
+
+const Media = memo(function ({ media }: { media: File | null }) {
+  if (media?.type === 'video/mp4') {
+    return (
+      <video
+        src={URL.createObjectURL(media)}
+        className="w-full"
+        autoPlay
+        loop
+        muted
+      />
+    )
+  }
+
+  if (media?.size) {
+    return (
+      <img src={URL.createObjectURL(media) ?? '/logo.png'} className="w-full" />
+    )
+  }
+
+  return <img src={'/logo.png'} className="w-full" />
+})

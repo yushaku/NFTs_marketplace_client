@@ -26,6 +26,7 @@
     "react-countup": "^6.5.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.51.1",
+    "react-parallax-tilt": "^1.7.220",
     "react-router-dom": "^6.22.3",
     "react-toastify": "^10.0.5",
     "react-ts-tradingview-widgets": "^1.2.4",

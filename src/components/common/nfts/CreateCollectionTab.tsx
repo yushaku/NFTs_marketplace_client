@@ -69,7 +69,7 @@ export const CreateCollectionTab = () => {
     'w-full rounded-lg border-2 border-gray-700 bg-layer p-3  focus:border-gray-500 focus:outline-none'
 
   return (
-    <div className="mt-32 flex gap-10">
+    <div className="mt-10 flex gap-10">
       <form
         className="mt-5 flex flex-1 flex-col gap-5"
         onSubmit={handleSubmit(onSubmit)}
@@ -122,17 +122,28 @@ export const CreateCollectionTab = () => {
         />
       </form>
 
-      <article className="flex flex-1 items-center justify-center gap-3">
+      <article className="flex-center flex-1 flex-col gap-5">
         <img
           src={media ? URL.createObjectURL(media) : '/logo.png'}
           className="size-20"
         />
         <div>
-          <h3 className="text-lg">Name: {getValues('name')}</h3>
-          <p className="text-lg text-gray-400">symbol: {getValues('symbol')}</p>
-          <p className="text-lg text-gray-400">
-            Author royalty: {getValues('royalty')} %
-          </p>
+          {getValues('name') && (
+            <h3 className="text-lg">Name: {getValues('name')}</h3>
+          )}
+
+          {getValues('symbol') && (
+            <p className="text-lg text-gray-400">
+              symbol: {getValues('symbol')}
+            </p>
+          )}
+
+          {getValues('royalty') && (
+            <p className="text-lg text-gray-400">
+              Author royalty: {getValues('royalty')} %
+            </p>
+          )}
+
           <p className="flex items-center gap-3 text-lg text-gray-400">
             address: <DotLoader />
           </p>

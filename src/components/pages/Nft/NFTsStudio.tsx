@@ -20,12 +20,13 @@ export const NFTsStudio = () => {
           return (
             <button
               key={feat}
-              className={`${pickedStyle} rounded-lg px-8 py-3 `}
+              className={`${pickedStyle} rounded-lg px-8 py-3`}
               onClick={() =>
                 navigate(`/nfts/studio?type=${feat}&collection=${collection}`)
               }
             >
-              {feat}
+              {feat === 'create_nft' && 'Create NFT'}
+              {feat === 'create_collection' && 'Create Collection'}
             </button>
           )
         })}
