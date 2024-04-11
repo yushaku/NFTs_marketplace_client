@@ -13,7 +13,7 @@ type Inputs = {
   description: string
 }
 
-type Props = { collectionAddress: string }
+type Props = { collectionAddress?: string }
 
 export const CreateNftTab = ({
   collectionAddress = PUBLIC_NFTS_ADDRESS

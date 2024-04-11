@@ -1,24 +1,41 @@
 import { routes } from '@/utils'
 import { ArrowRightIcon } from '@heroicons/react/20/solid'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 export const NftDashboard = () => {
-  const [selected, setSelected] = useState(collections[0])
+  const [index, setIndex] = useState(0)
+  const [selected, setSelected] = useState(collections[index])
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setSelected(collections[index])
+      setIndex((index + 1) % collections.length)
+    }, 10_000)
+
+    return () => clearInterval(id)
+  }, [index])
 
   return (
     <section className="w-full">
-      <div className="group relative">
+      <div className="group relative overflow-hidden rounded-lg">
         <img
           className="h-[600px] w-full object-cover"
           src={selected.img}
           alt="NFT"
         />
         <article className="absolute inset-0 w-full bg-gradient-to-t from-[rgba(0,0,0,0.9)] to-[rgba(255,255,255,0.05)]" />
-        <article className="absolute bottom-0 left-0 p-10 pb-24">
-          <div className="animate translate-y-20 group-hover:translate-y-0">
-            <h4 className="text-2xl font-bold">{selected.name}</h4>
-            <h4 className="text-base">BY {selected.author}</h4>
+        <article className="absolute bottom-0 left-0 p-10">
+          <div className="animate flex translate-y-20 items-center gap-5 group-hover:translate-y-0">
+            <img
+              src={selected.authorImg}
+              alt="Author"
+              className="size-10 rounded-full"
+            />
+            <div>
+              <h4 className="text-2xl font-bold">{selected.name}</h4>
+              <h4 className="text-base">BY {selected.author}</h4>
+            </div>
           </div>
 
           <div className="animate mt-6 flex items-center gap-5 opacity-0 delay-150 group-hover:opacity-100">
@@ -42,13 +59,14 @@ export const NftDashboard = () => {
         </article>
       </div>
 
-      <ul className="relative grid translate-y-[-50px] grid-cols-5 gap-5">
-        {collections.map((col, index) => {
+      <ul className="relative mt-5 grid grid-cols-4 gap-5">
+        {collections.map((col, jndex) => {
+          if (index === jndex) return null
           return (
             <li
-              className="animate group relative cursor-pointer overflow-hidden hover:-translate-y-2"
+              className="animate group relative cursor-pointer overflow-hidden rounded-lg hover:-translate-y-2"
               onClick={() => setSelected(col)}
-              key={index}
+              key={jndex}
             >
               <img
                 src={col.img}
@@ -68,6 +86,13 @@ export const NftDashboard = () => {
 }
 
 const collections = [
+  {
+    name: 'Gundams war',
+    author: 'Yushaku',
+    authorImg: '/logo.png',
+    address: '0x14a9c99d89106F66C2B86910d2C622Ce0A58C630',
+    img: '/gundams.jpg'
+  },
   {
     name: 'Pudgy Penguins',
     author: 'PUDGY PENGUINS',

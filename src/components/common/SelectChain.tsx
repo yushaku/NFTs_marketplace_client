@@ -1,7 +1,7 @@
 import { Menu } from '@headlessui/react'
 import { Fragment } from 'react'
 import { useChainId, useSwitchChain } from 'wagmi'
-import { BSC, ETH, Matic } from '../icons'
+import { BSC } from '../icons'
 import { cn } from '@/utils'
 import { Dropdown } from '../warper'
 
@@ -46,24 +46,29 @@ export const SelectChain = () => {
 }
 
 const chainList = [
-  {
-    id: 1,
-    name: 'Ethereum',
-    logo: ETH
-  },
-  {
-    id: 5,
-    name: 'Goerli',
-    logo: ETH
-  },
-  {
-    id: 80001,
-    name: 'Mumbai',
-    logo: Matic
-  },
+  // {
+  //   id: 1,
+  //   name: 'Ethereum',
+  //   logo: ETH
+  // },
+  // {
+  //   id: 5,
+  //   name: 'Goerli',
+  //   logo: ETH
+  // },
+  // {
+  //   id: 80001,
+  //   name: 'Mumbai',
+  //   logo: Matic
+  // },
   {
     id: 97,
     name: 'BSC Testnet',
+    logo: BSC
+  },
+  {
+    id: 56,
+    name: 'BSC',
     logo: BSC
   }
 ] as const

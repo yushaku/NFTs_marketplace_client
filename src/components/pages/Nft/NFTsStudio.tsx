@@ -10,7 +10,7 @@ export const NFTsStudio = () => {
   const queryParams = new URLSearchParams(location.search)
 
   const type = queryParams.get('type') ?? 'create_nft'
-  const collection = queryParams.get('collection')
+  const collection = queryParams.get('collection') ?? ''
 
   return (
     <section className="min-h-[80dvh]">
