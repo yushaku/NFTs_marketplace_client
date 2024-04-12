@@ -59,9 +59,8 @@ export const NftDashboard = () => {
         </article>
       </div>
 
-      <ul className="relative mt-5 grid grid-cols-4 gap-5">
+      <ul className="relative mt-5 grid grid-cols-5 gap-5">
         {collections.map((col, jndex) => {
-          if (index === jndex) return null
           return (
             <li
               className="animate group relative cursor-pointer overflow-hidden rounded-lg hover:-translate-y-2"

@@ -1,4 +1,5 @@
 import { Button } from '@/components/common/Button'
+import Tilt from 'react-parallax-tilt'
 import { NativeToken } from '@/components/common/NativeTokenBalance'
 import { Card } from '@/components/warper'
 import { GATEWAY_URL, chartdata, fakeNFTs } from '@/utils'
@@ -12,6 +13,7 @@ import {
 import { AreaChart, Divider } from '@tremor/react'
 import { Fragment } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import TypeIt from 'typeit-react'
 
 export const DetailNFT = () => {
   const { cip } = useParams()
@@ -31,15 +33,27 @@ export const DetailNFT = () => {
 
       <div className="grid grid-cols-2 gap-5">
         <article>
-          <Card className="col-span-1 h-1/2">
-            <video
-              src={`${GATEWAY_URL}${nft.url}`}
-              className="size-full"
-              autoPlay
-              loop
-              muted
-            />
-          </Card>
+          <div className="flex-center group col-span-1">
+            <Tilt
+              tiltMaxAngleX={5}
+              tiltMaxAngleY={10}
+              glareEnable
+              glareMaxOpacity={0.5}
+              scale={1.1}
+              perspective={500}
+              className="animate parallax-effect h-1/2 w-full cursor-grabbing group-hover:w-fit"
+            >
+              <Card className="animate h-[600px] w-full group-hover:w-fit">
+                <video
+                  src={`${GATEWAY_URL}${nft.url}`}
+                  className="size-full"
+                  autoPlay
+                  loop
+                  muted
+                />
+              </Card>
+            </Tilt>
+          </div>
 
           <Card className="mt-5">
             <h3 className="text-2xl">Description</h3>
@@ -70,7 +84,13 @@ export const DetailNFT = () => {
         <article className="col-span-1">
           <Card>
             <h3 className="text-2xl text-lighterAccent">
-              #{nft.cip} - {nft.name}
+              <TypeIt
+                options={{
+                  strings: [`#${nft.cip} - ${nft.name}`],
+                  waitUntilVisible: true,
+                  cursor: false
+                }}
+              />
             </h3>
             <p className="text-sm text-gray-50">Owned by Yushaku</p>
             <ul className="mt-5 flex gap-4">

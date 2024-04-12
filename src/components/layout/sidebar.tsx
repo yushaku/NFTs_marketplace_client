@@ -113,12 +113,12 @@ const navlinks = [
     childrens: [
       {
         icon: WalletIcon,
-        title: 'My NFTs',
+        title: 'Inventory',
         href: routes.myNFTs
       },
       {
         icon: ScissorsIcon,
-        title: 'Create NFT',
+        title: 'Studio',
         href: routes.nftStudio
       }
     ]
