@@ -2,10 +2,10 @@ import { ERC721_ABI } from '@/abi/erc721.ts'
 import { Button } from '@/components/common/Button'
 import { DotLoader } from '@/components/common/Loading'
 import { NativeToken } from '@/components/common/NativeTokenBalance'
-import useLocalStorage from 'use-local-storage'
 import { GATEWAY_URL, ItemNft, LOCAL_STORAGE, NftCart, fakeNFTs } from '@/utils'
-import { ShoppingCartIcon } from '@heroicons/react/16/solid'
+import { CheckCircleIcon, ShoppingCartIcon } from '@heroicons/react/16/solid'
 import { useNavigate, useParams } from 'react-router-dom'
+import useLocalStorage from 'use-local-storage'
 import { Address } from 'viem'
 import { useReadContracts } from 'wagmi'
 
@@ -32,6 +32,7 @@ export const CollectionNFTs = () => {
       delete value[key]
       setValue(value)
     } else {
+      console.log('add', key)
       setValue({
         ...value,
         [key]: data
@@ -53,6 +54,7 @@ export const CollectionNFTs = () => {
 
       <ul className="grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-3 lg:grid-cols-6 lg:gap-5">
         {fakeNFTs.map((item, index) => {
+          const key = `${address}-${item.cip}`
           const styleBtn =
             index % 2 === 0
               ? '-right-full group-hover:right-1/2 group-hover:translate-x-1/2'
@@ -77,8 +79,9 @@ export const CollectionNFTs = () => {
               </h3>
 
               <Button
+                variant={value[key] ? 'outline' : 'filled'}
                 onClick={() => handleToggleCart({ address, ...item })}
-                icon={ShoppingCartIcon}
+                icon={value[key] ? CheckCircleIcon : ShoppingCartIcon}
                 className={`${styleBtn} animate absolute bottom-3 z-10 w-4/5 delay-100`}
               />
 

@@ -28,7 +28,9 @@ export const Header = ({ theme, switchTheme }: Props) => {
           )}
         </button>
 
-        <CartList />
+        <span className={`${location.includes('nft') ? '' : 'hidden'}`}>
+          <CartList />
+        </span>
 
         <span className="hidden md:block">
           <SelectChain />
