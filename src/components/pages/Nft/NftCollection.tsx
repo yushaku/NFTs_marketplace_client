@@ -2,15 +2,18 @@ import { ERC721_ABI } from '@/abi/erc721.ts'
 import { Button } from '@/components/common/Button'
 import { DotLoader } from '@/components/common/Loading'
 import { NativeToken } from '@/components/common/NativeTokenBalance'
-import { GATEWAY_URL, fakeNFTs } from '@/utils'
+import useLocalStorage from 'use-local-storage'
+import { GATEWAY_URL, ItemNft, LOCAL_STORAGE, NftCart, fakeNFTs } from '@/utils'
 import { ShoppingCartIcon } from '@heroicons/react/16/solid'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Address } from 'viem'
 import { useReadContracts } from 'wagmi'
 
 export const CollectionNFTs = () => {
-  const { id: address } = useParams()
+  const { id: address = '' } = useParams()
   const navigate = useNavigate()
+  const [value, setValue] = useLocalStorage<NftCart>(LOCAL_STORAGE.SHOP_NFT, {})
+
   const config = { abi: ERC721_ABI, address: address as Address } as const
 
   const { data, isLoading } = useReadContracts({
@@ -20,6 +23,21 @@ export const CollectionNFTs = () => {
       { ...config, functionName: 'baseTokenURI' }
     ]
   })
+
+  function handleToggleCart(data: ItemNft) {
+    const { cip } = data
+    const key = `${address}-${cip}`
+
+    if (value[key]) {
+      delete value[key]
+      setValue(value)
+    } else {
+      setValue({
+        ...value,
+        [key]: data
+      })
+    }
+  }
 
   return (
     <section>
@@ -50,7 +68,7 @@ export const CollectionNFTs = () => {
                 src={`${GATEWAY_URL}${item.url}`}
                 width="100%"
               />
-              <h3 className="animate absolute bottom-5 left-5 z-50 delay-100 group-hover:bottom-16">
+              <h3 className="animate absolute bottom-5 left-5 z-10 delay-100 group-hover:bottom-16">
                 <strong className="mb-2">{item.name}</strong>
                 <p>
                   Price: {item.price}{' '}
@@ -59,8 +77,9 @@ export const CollectionNFTs = () => {
               </h3>
 
               <Button
+                onClick={() => handleToggleCart({ address, ...item })}
                 icon={ShoppingCartIcon}
-                className={`${styleBtn} animate absolute bottom-3 z-50 w-4/5 delay-100`}
+                className={`${styleBtn} animate absolute bottom-3 z-10 w-4/5 delay-100`}
               />
 
               <article

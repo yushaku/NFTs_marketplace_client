@@ -39,8 +39,13 @@ export const Button = ({
       })}
       {...props}
     >
-      {Icon ? <Icon className="mr-2 inline-block size-5" /> : null}
-      {loading ? <DotLoader /> : title}
+      {Icon ? <Icon className="inline-block size-5" /> : null}
+
+      {loading ? (
+        <DotLoader />
+      ) : (
+        <span className={`${title && 'ml-2'}`}>{title}</span>
+      )}
     </button>
   )
 }

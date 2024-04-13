@@ -3,3 +3,4 @@
 export * from './useNfts'
 export * from './useCollector'
 export * from './useFocus'
+export * from './useStorage'
