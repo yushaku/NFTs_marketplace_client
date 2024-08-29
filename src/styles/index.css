@@ -8,19 +8,20 @@
   --background: #181d27;
   --layer: #1e2431;
   --focus: #2d3549;
-  --text-primary: #ffffff;
-  --text-secondary: #373d4c;
+  --text-primary: #f5f3f0;
+  --text-secondary: #9ca3af;
   --accent: #3a78ff;
   --lighter-accent: #6ca3ff;
 }
 
 [data-theme='light'] {
-  --background: white;
-  --layer: gray;
-  --focus: #2d3549;
-  --text-primary: black;
-  --text-secondary: royalblue;
-  --accent: purple;
+  --background: #f5f7fa; /* Light gray-blue */
+  --layer: #ffffff; /* White */
+  --focus: #d9e2ec; /* Soft light blue */
+  --text-primary: #1e2431; /* Dark navy blue */
+  --text-secondary: #7d879c; /* Muted blue-gray */
+  --accent: #3a78ff; /* Keep accent color consistent */
+  --lighter-accent: #6ca3ff; /* Keep lighter accent color consistent */
 }
 
 @layer base {
@@ -84,7 +85,7 @@
   }
 
   .btn-outline {
-    @apply border border-gray-600 bg-layer hover:bg-focus;
+    @apply border border-gray-600 text-textPrimary bg-layer hover:bg-focus;
   }
 
   .btn-solid {
