@@ -30,7 +30,7 @@ type Props = {
   isOpen: boolean
   setOpen: () => void
   address: Address
-  balance: string
+  balance: string | number
 }
 
 export const StakeForm = ({ isOpen, setOpen, address, balance }: Props) => {

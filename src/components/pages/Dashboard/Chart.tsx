@@ -7,15 +7,17 @@ const dataFormatter = (number: number) =>
 export const StakedValueLockChart = () => {
   return (
     <Card className="mt-10">
-      <h3 className="my-5 p-4 text-lg font-bold">Staked Value</h3>
+      <h3 className="my-5 p-4 text-lg font-bold text-lighterAccent">
+        Staked Value
+      </h3>
       <AreaChart
         className="h-80"
         data={chartdata}
         index="date"
         categories={['SYK', 'USDT']}
-        colors={['indigo', 'rose']}
+        colors={['indigo', 'green']}
         valueFormatter={dataFormatter}
-        yAxisWidth={60}
+        yAxisWidth={100}
         onValueChange={(v) => console.log(v)}
       />
     </Card>
