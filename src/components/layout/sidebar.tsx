@@ -40,7 +40,7 @@ export const Sidebar = () => {
         onClick={() => setIsSmall(!isSmall)}
       >
         <ArrowLeftIcon
-          className={`${isSmall ? 'rotate-180' : ''} size-4 stroke-gray-600 transition-all duration-300`}
+          className={`${isSmall ? 'rotate-180' : ''} size-4 stroke-textSecondary transition-all duration-300`}
         />
       </span>
 
@@ -58,8 +58,10 @@ export const Sidebar = () => {
                 to={href}
                 className={`${pickedStyle} ${isSmall ? 'px-4 py-5' : 'px-8 py-5'} group flex gap-3 hover:border-l-4 hover:border-l-accent hover:bg-focus`}
               >
-                <Icon className="size-6 group-hover:fill-accent" />
-                <span className={`${isSmall ? 'hidden' : 'block'}`}>
+                <Icon className="size-6 fill-textPrimary group-hover:fill-accent" />
+                <span
+                  className={`${isSmall ? 'hidden' : 'block'} text-textSecondary group-hover:text-accent`}
+                >
                   {title}
                 </span>
               </NavLink>

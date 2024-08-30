@@ -13,7 +13,7 @@ export const SelectChain = () => {
   const Logo = chainList.find(({ id }) => id === chainId)!.logo
 
   const Title = (
-    <h6 className="flex gap-2">
+    <h6 className="flex gap-2 text-textSecondary">
       <Logo className="size-5" />
       {name}
     </h6>
@@ -29,7 +29,7 @@ export const SelectChain = () => {
                 <button
                   onClick={() => switchChain({ chainId: id })}
                   className={cn(
-                    active ? 'bg-focus text-gray-100' : 'text-gray-200',
+                    active ? 'bg-focus text-accent' : 'text-textSecondary',
                     'flex w-full items-center gap-3 px-4 py-3 text-sm'
                   )}
                 >
