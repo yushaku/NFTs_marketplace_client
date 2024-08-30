@@ -6,20 +6,30 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { WagmiProvider } from 'wagmi'
 import App from './App.tsx'
+import { checkUser } from './hooks'
 import './styles/index.css'
-import { config, connectModalStyle } from './utils'
+import { config, connectModalStyle, env } from './utils'
+import { ThirdwebProvider } from '@thirdweb-dev/react'
 
 const queryClient = new QueryClient()
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <WagmiProvider config={config}>
-      <QueryClientProvider client={queryClient}>
-        <ConnectKitProvider customTheme={connectModalStyle}>
-          <App />
-          <ToastContainer />
-        </ConnectKitProvider>
-      </QueryClientProvider>
+      <ThirdwebProvider
+        activeChain="binance-testnet"
+        clientId={env.VITE_THIRD_WEB}
+      >
+        <QueryClientProvider client={queryClient}>
+          <ConnectKitProvider
+            onConnect={({ address }) => checkUser({ address })}
+            customTheme={connectModalStyle}
+          >
+            <App />
+            <ToastContainer />
+          </ConnectKitProvider>
+        </QueryClientProvider>
+      </ThirdwebProvider>
     </WagmiProvider>
   </React.StrictMode>
 )

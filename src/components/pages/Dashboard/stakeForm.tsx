@@ -2,7 +2,7 @@ import { ERC20_ABI } from '@/abi/erc20'
 import { stakeModuleABI } from '@/abi/stakeModule'
 import { Button } from '@/components/common/Button'
 import ModalWarp from '@/components/warper/ModalWarper'
-import { MAX_VALUE, STAKE_ADRESS, TOKEN_GOVERNANCE, cn } from '@/utils'
+import { MAX_VALUE, STAKE_ADRESS, YSK_ADDRESS, cn } from '@/utils'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -30,7 +30,7 @@ type Props = {
   isOpen: boolean
   setOpen: () => void
   address: Address
-  balance: string
+  balance: string | number
 }
 
 export const StakeForm = ({ isOpen, setOpen, address, balance }: Props) => {
@@ -42,7 +42,7 @@ export const StakeForm = ({ isOpen, setOpen, address, balance }: Props) => {
 
   const allowance = useReadContract({
     abi: ERC20_ABI,
-    address: TOKEN_GOVERNANCE,
+    address: YSK_ADDRESS,
     functionName: 'allowance',
     args: [address, STAKE_ADRESS]
   })
@@ -59,7 +59,7 @@ export const StakeForm = ({ isOpen, setOpen, address, balance }: Props) => {
 
   async function approve() {
     const res = await writeContractAsync({
-      address: TOKEN_GOVERNANCE,
+      address: YSK_ADDRESS,
       abi: ERC20_ABI,
       functionName: 'approve',
       args: [STAKE_ADRESS, MAX_VALUE]

@@ -2,9 +2,15 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Layout } from './components/layout'
 import { Comming } from './components/pages/Comming'
 import { Dashboard } from './components/pages/Dashboard'
-import { Nfts } from './components/pages/Nft'
-import { CollectionNFTs } from './components/pages/Nft/NftCollection'
-import { DetailNFT } from './components/pages/Nft/NftDetail'
+import {
+  CollectionNFTs,
+  DetailNFT,
+  NFTsStudio,
+  NftMarket,
+  UserCollection,
+  UserNftDetail,
+  UserNfts
+} from './components/pages/Nft'
 import { NotMatch } from './components/pages/Notmatch'
 import { ShopPage } from './components/pages/Shop'
 import { Swap } from './components/pages/Swap'
@@ -21,9 +27,17 @@ function App() {
           <Route path={routes.dashboard} element={<Dashboard />} />
           <Route path={routes.trade} element={<Swap />} />
 
-          <Route path={routes.nfts} element={<Nfts />} />
+          <Route path={routes.nfts} element={<NftMarket />} />
+          <Route path={routes.nftStudio} element={<NFTsStudio />} />
           <Route path={`${routes.nfts}/:id`} element={<CollectionNFTs />} />
           <Route path={`${routes.nfts}/:id/:cip`} element={<DetailNFT />} />
+
+          <Route path={routes.myNFTs} element={<UserCollection />} />
+          <Route path={`${routes.myNFTs}/:id`} element={<UserNfts />} />
+          <Route
+            path={`${routes.myNFTs}/:id/:cip`}
+            element={<UserNftDetail />}
+          />
 
           <Route path={routes.history} element={<Comming />} />
           <Route path={routes.vaults} element={<Comming />} />

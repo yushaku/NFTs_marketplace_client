@@ -55,8 +55,8 @@ export const BTC = (props: React.SVGProps<SVGSVGElement>) => (
         y1="-.024%"
         y2="99.99%"
       >
-        <stop offset="0%" stop-color="#F9AA4B" />
-        <stop offset="100%" stop-color="#F7931A" />
+        <stop offset="0%" stopColor="#F9AA4B" />
+        <stop offset="100%" stopColor="#F7931A" />
       </linearGradient>
     </defs>
     <path

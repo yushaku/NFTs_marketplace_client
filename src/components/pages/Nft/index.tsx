@@ -1,9 +1,10 @@
-import { NftDashboard } from './NftDashboard'
+/* eslint-disable react-refresh/only-export-components */
 
-export const Nfts = () => {
-  return (
-    <section>
-      <NftDashboard />
-    </section>
-  )
-}
+export * from './NFTsStudio'
+export * from './NftDetail'
+export * from './Nftmarket'
+export * from './NftCollection'
+
+export * from './UserCollection'
+export * from './UserNfts'
+export * from './UserNftDetail'
