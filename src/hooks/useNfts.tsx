@@ -35,7 +35,7 @@ type ImportCollection = {
   name: string
   address: string
   chainId?: number
-  userAddress?: `0x${string}`
+  userAddress?: string
 }
 export const useInportCollection = () => {
   return useMutation({

@@ -14,8 +14,8 @@ export const NativeBalance = ({ address }: { address?: Address }) => {
 }
 
 export const NativeToken = (props: React.SVGProps<SVGSVGElement>) => {
-  const chainId = useChainId()
-  let Token: (props: React.SVGProps<SVGSVGElement>) => JSX.Element
+  const chainId: number = useChainId()
+  let Token: (_props: React.SVGProps<SVGSVGElement>) => JSX.Element
 
   switch (chainId) {
     case 1:

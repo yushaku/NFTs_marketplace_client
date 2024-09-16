@@ -210,7 +210,7 @@ export const UserNftDetail = () => {
 
 type Props = React.FormHTMLAttributes<HTMLFormElement> & {
   whenSubmit?: () => void
-  userAddress?: `0x${string}`
+  userAddress?: string
 }
 
 type Inputs = {
@@ -230,7 +230,7 @@ const ListNftForm = ({ className, userAddress }: Props) => {
     formState: { errors }
   } = useForm<Inputs>({ resolver: yupResolver(schema) })
 
-  const { contract: marketplace, isLoading: loadingMarketplace } = useContract(
+  const { contract: marketplace } = useContract(
     MARKETPLACE_ADDRESS,
     'marketplace-v3'
   )
@@ -238,11 +238,11 @@ const ListNftForm = ({ className, userAddress }: Props) => {
   const { contract: nftCollection } = useContract(NFT_ADRESS)
   const { mutateAsync: listMarket } = useCreateDirectListing(marketplace)
 
-  // const { data: directListing, isLoading: loadingDirectListing } =
-  //   useValidDirectListings(marketplace, {
-  //     tokenContract: NFT_ADRESS,
-  //     tokenId: 1
-  //   })
+  const { data: directListing } = useValidDirectListings(marketplace, {
+    tokenContract: NFT_ADRESS,
+    tokenId: 1
+  })
+  console.log(directListing)
 
   async function checkAndProvideApproval() {
     const hasApproval = await nftCollection?.call('isApprovedForAll', [
@@ -263,19 +263,17 @@ const ListNftForm = ({ className, userAddress }: Props) => {
     return true
   }
 
-  async function onSubmit(data: Inputs) {
-    const { amount } = data
-
-    await checkAndProvideApproval()
-    const txResult = await listMarket({
-      assetContractAddress: data.nftContractAddress,
-      tokenId: data.tokenId,
-      pricePerToken: amount,
-      startTimestamp: new Date(data.startDate),
-      endTimestamp: new Date(data.endDate)
-    })
-
-    return txResult
+  async function onSubmit(_data: Inputs) {
+    // const { amount } = data
+    // await checkAndProvideApproval()
+    // const txResult = await listMarket({
+    // assetContractAddress: data.nftContractAddress,
+    // tokenId: data.tokenId,
+    // pricePerToken: amount,
+    // startTimestamp: new Date(data.startDate),
+    // endTimestamp: new Date(data.endDate)
+    // })
+    // return txResult
   }
 
   return (

@@ -70,7 +70,7 @@ export const UserCollection = () => {
 }
 
 type Props = React.FormHTMLAttributes<HTMLFormElement> & {
-  userAddress?: `0x${string}`
+  userAddress?: string
   whenSubmit: ({ address, name }: { address: string; name: string }) => void
   onSuccess: () => void
 }

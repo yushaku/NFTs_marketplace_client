@@ -8,7 +8,7 @@ type Props = {
 export const NftItem = ({ nft }: Props) => {
   return (
     <li className="group relative h-80 overflow-hidden rounded-lg">
-      <Nftmedia metadata={nft.metadata} />
+      <Nftmedia metadata={nft.metadata} isOn={false} />
 
       <h3 className="animate absolute -left-full bottom-5 z-50 delay-100 group-hover:left-2">
         <p>ID #{nft.metadata.id}</p>

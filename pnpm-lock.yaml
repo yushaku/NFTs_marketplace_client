@@ -26,6 +26,9 @@ importers:
       '@thirdweb-dev/react':
         specifier: ^4.9.4
         version: 4.9.4(olptmnqsyacg3xtm34whgk5me4)
+      '@thirdweb-dev/sdk':
+        specifier: ^4.0.99
+        version: 4.0.99(@react-native-async-storage/async-storage@1.23.1(react-native@0.73.6(@babel/core@7.24.3)(@babel/preset-env@7.24.3(@babel/core@7.24.3))(bufferutil@4.0.8)(encoding@0.1.13)(react@18.2.0)(utf-8-validate@5.0.10)))(@types/react-dom@18.2.23)(@types/react@18.2.73)(bufferutil@4.0.8)(encoding@0.1.13)(ethers@5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10))(react-dom@18.2.0(react@18.2.0))(react-native@0.73.6(@babel/core@7.24.3)(@babel/preset-env@7.24.3(@babel/core@7.24.3))(bufferutil@4.0.8)(encoding@0.1.13)(react@18.2.0)(utf-8-validate@5.0.10))(react@18.2.0)(typescript@5.4.3)(utf-8-validate@5.0.10)
       '@tremor/react':
         specifier: ^3.15.0
         version: 3.15.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(tailwindcss@3.4.3)
@@ -1187,7 +1190,7 @@ packages:
   '@eth-optimism/contracts@0.6.0':
     resolution: {integrity: sha512-vQ04wfG9kMf1Fwy3FEMqH2QZbgS0gldKhcBeBUPfO8zu68L61VI97UDXmsMQXzTsEAxK8HnokW3/gosl4/NW3w==}
     peerDependencies:
-      ethers: ^5
+      ethers: ^5.7.2
 
   '@eth-optimism/core-utils@0.12.0':
     resolution: {integrity: sha512-qW+7LZYCz7i8dRa7SRlUKIo1VBU8lvN0HeXCxJR+z+xtMzMQpPds20XJNCMclszxYQHkXY00fOT6GvFw9ZL6nw==}
@@ -9878,7 +9881,7 @@ snapshots:
       lodash: 4.17.21
       merkletreejs: 0.3.11
       rlp: 2.2.7
-      semver: 7.6.0
+      semver: 7.6.3
     transitivePeerDependencies:
       - bufferutil
       - encoding
@@ -11525,7 +11528,7 @@ snapshots:
       hermes-profile-transformer: 0.0.6
       node-stream-zip: 1.15.0
       ora: 5.4.1
-      semver: 7.6.0
+      semver: 7.6.3
       strip-ansi: 5.2.0
       wcwidth: 1.0.1
       yaml: 2.4.1
@@ -11591,7 +11594,7 @@ snapshots:
       node-fetch: 2.7.0(encoding@0.1.13)
       open: 6.4.0
       ora: 5.4.1
-      semver: 7.6.0
+      semver: 7.6.3
       shell-quote: 1.8.1
       sudo-prompt: 9.2.1
     transitivePeerDependencies:
@@ -11620,7 +11623,7 @@ snapshots:
       fs-extra: 8.1.0
       graceful-fs: 4.2.11
       prompts: 2.4.2
-      semver: 7.6.0
+      semver: 7.6.3
     transitivePeerDependencies:
       - bufferutil
       - encoding
@@ -14615,7 +14618,7 @@ snapshots:
       browserify-rsa: 4.1.0
       create-hash: 1.2.0
       create-hmac: 1.1.7
-      elliptic: 6.5.5
+      elliptic: 6.5.7
       hash-base: 3.0.4
       inherits: 2.0.4
       parse-asn1: 5.1.7
@@ -15036,7 +15039,7 @@ snapshots:
   create-ecdh@4.0.4:
     dependencies:
       bn.js: 4.12.0
-      elliptic: 6.5.5
+      elliptic: 6.5.7
 
   create-hash@1.2.0:
     dependencies:
@@ -15860,7 +15863,7 @@ snapshots:
       proxy-addr: 2.0.7
       rfdc: 1.4.1
       secure-json-parse: 2.7.0
-      semver: 7.6.0
+      semver: 7.6.3
       toad-cache: 3.7.0
 
   fastq@1.17.1:
