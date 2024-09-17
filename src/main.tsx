@@ -22,6 +22,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       >
         <QueryClientProvider client={queryClient}>
           <ConnectKitProvider
+            theme="midnight"
             onConnect={({ address }) => checkUser({ address })}
             customTheme={connectModalStyle}
           >
