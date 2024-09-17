@@ -15,7 +15,7 @@ export const SelectChain = () => {
   const Title = (
     <h6 className="flex gap-2 text-textSecondary">
       <Logo className="size-5" />
-      {name}
+      <span className="hidden md:inline">{name}</span>
     </h6>
   )
 

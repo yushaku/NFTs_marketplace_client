@@ -1,10 +1,11 @@
 import { MoonIcon, SunIcon } from '@heroicons/react/16/solid'
 import { ConnectKitButton } from 'connectkit'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { SelectChain } from '../common/SelectChain'
 import { routes } from '@/utils'
 import { CartList } from '../common/CartList'
 import createAvatar from '@/utils/avatar'
+import { MobileSidebar } from './MobileSidebar'
 
 type Props = {
   theme: string
@@ -17,7 +18,13 @@ export const Header = ({ theme, switchTheme }: Props) => {
 
   return (
     <header className="mt-5 flex items-center justify-between py-5">
-      <h3 className="heading-lg lg:heading-2xl text-lighterAccent">{title}</h3>
+      <Link to="/" className="flex items-center gap-3 md:hidden">
+        <img src="/logo.png" className="size-12" alt="Vite logo" />
+      </Link>
+
+      <h3 className="heading-lg lg:heading-2xl hidden text-lighterAccent md:block">
+        {title}
+      </h3>
 
       <div className="flex-center gap-3">
         <button className="hidden p-3 md:block" onClick={switchTheme}>
@@ -43,6 +50,8 @@ export const Header = ({ theme, switchTheme }: Props) => {
         <span className="md:hidden">
           <WalletAvatar />
         </span>
+
+        <MobileSidebar />
       </div>
     </header>
   )
@@ -81,7 +90,7 @@ export const WalletAvatar = () => {
             style={style}
             id="avatar"
             onClick={show}
-            className="size-12 rounded-full"
+            className="size-10 rounded-full"
           ></button>
         )
       }}

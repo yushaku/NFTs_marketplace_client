@@ -1,4 +1,5 @@
-import { routes } from '@/utils'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
+import { cn, routes } from '@/utils'
 import {
   ArrowLeftIcon,
   ArrowPathIcon,
@@ -11,16 +12,27 @@ import {
   ShoppingBagIcon,
   WalletIcon
 } from '@heroicons/react/16/solid'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 
 export const Sidebar = () => {
   const location = useLocation().pathname
   const [isSmall, setIsSmall] = useState(false)
 
+  const isTablet = useMediaQuery(
+    '(min-width: 600px) and (max-width: 1024px) and (orientation: portrait)'
+  )
+
+  useEffect(() => {
+    setIsSmall(isTablet)
+  }, [isTablet])
+
   return (
     <section
-      className={`${isSmall ? 'w-16' : 'w-72'} relative z-50 h-screen bg-layer transition-all duration-300`}
+      className={cn(
+        'relative z-50 hidden h-screen bg-layer transition-all duration-300 md:block',
+        isSmall ? 'w-16' : 'w-72'
+      )}
     >
       <Link
         to="/"
@@ -96,7 +108,8 @@ export const Sidebar = () => {
   )
 }
 
-const navlinks = [
+// eslint-disable-next-line react-refresh/only-export-components
+export const navlinks = [
   {
     icon: HomeIcon,
     title: 'Dashboard',
