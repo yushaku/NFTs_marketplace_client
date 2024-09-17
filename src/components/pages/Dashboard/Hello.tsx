@@ -1,5 +1,4 @@
 import { Card } from '@/components/warper'
-import logo from '/logo.png'
 import { WalletButton } from '@/components/layout/header'
 import TypeIt from 'typeit-react'
 
@@ -7,7 +6,7 @@ export const HelloGuy = () => {
   return (
     <section className="mt-5 flex flex-wrap gap-5 lg:flex-nowrap">
       <Card className="flex w-full items-center gap-4 lg:w-1/2">
-        <img src={logo} className="size-32" alt="Vite logo" />
+        <img src="/logo.png" className="size-32" alt="Vite logo" />
 
         <div>
           <h6 className="text-lg">Hello, my Friend</h6>

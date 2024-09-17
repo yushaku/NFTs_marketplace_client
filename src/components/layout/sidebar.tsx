@@ -13,7 +13,6 @@ import {
 } from '@heroicons/react/16/solid'
 import { useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import logo from '/logo.png'
 
 export const Sidebar = () => {
   const location = useLocation().pathname
@@ -27,7 +26,7 @@ export const Sidebar = () => {
         to="/"
         className={`flex items-center gap-3 ${isSmall ? 'px-2 py-8' : 'p-8'}`}
       >
-        <img src={logo} className="size-10" alt="Vite logo" />
+        <img src="/logo.png" className="size-10" alt="Vite logo" />
         <h3
           className={`${isSmall ? 'hidden' : 'block'} heading-2xl text-lighterAccent`}
         >

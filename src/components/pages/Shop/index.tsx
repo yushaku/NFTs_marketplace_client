@@ -5,7 +5,7 @@ import { productsMoc } from '@/utils'
 export const ShopPage = () => {
   return (
     <div>
-      <h3 className="text-2xl font-bold">Buy some product to support us</h3>
+      <h3 className="text-lg">Buy some product to support us</h3>
 
       <ul className="mt-10 grid grid-cols-3 gap-4">
         {productsMoc.map((item, index) => {

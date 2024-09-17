@@ -52,7 +52,7 @@ export default {
             emphasis: colors.gray[700]
           },
           border: {
-            DEFAULT: colors.gray[200]
+            DEFAULT: 'rgba(156, 163, 175, 0.4)'
           },
           ring: {
             DEFAULT: colors.gray[200]

@@ -9,8 +9,8 @@ export const SelectChain = () => {
   const chainId = useChainId()
   const { switchChain } = useSwitchChain()
 
-  const name = chainList.find(({ id }) => id === chainId)?.name
-  const Logo = chainList.find(({ id }) => id === chainId)!.logo
+  const name = chainList.find(({ id }) => id === chainId)?.name ?? 'BSC Testnet'
+  const Logo = chainList.find(({ id }) => id === chainId)?.logo ?? BSC
 
   const Title = (
     <h6 className="flex gap-2 text-textSecondary">
