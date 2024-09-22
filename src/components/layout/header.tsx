@@ -6,6 +6,7 @@ import { routes } from '@/utils'
 import { CartList } from '../common/CartList'
 import createAvatar from '@/utils/avatar'
 import { MobileSidebar } from './MobileSidebar'
+import { ShopCartList } from '@/modules/shop/components/shopCartList'
 
 type Props = {
   theme: string
@@ -37,6 +38,10 @@ export const Header = ({ theme, switchTheme }: Props) => {
 
         <span className={`${location.includes('nft') ? '' : 'hidden'}`}>
           <CartList />
+        </span>
+
+        <span className={`${location.includes('shop') ? '' : 'hidden'}`}>
+          <ShopCartList />
         </span>
 
         <span className="hidden md:block">

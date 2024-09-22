@@ -12,10 +12,10 @@ import {
   UserNfts
 } from './components/pages/Nft'
 import { NotMatch } from './components/pages/Notmatch'
-import { ShopPage } from './components/pages/Shop'
 import { Swap } from './components/pages/Swap'
 import { Home } from './components/pages/home'
 import { routes } from './utils'
+import { ShopPage } from './modules/shop'
 
 function App() {
   return (
