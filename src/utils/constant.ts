@@ -11,7 +11,8 @@ export const env = cleanEnv(import.meta.env, {
   VITE_GRAPHQL_CMS_ENDPOINT: str(),
   VITE_GRAPHQL_CMS_TOKEN: str(),
   VITE_PINATA_KEY: str(),
-  VITE_PINATA_SECRET: str()
+  VITE_PINATA_SECRET: str(),
+  VITE_API_ENPOINT: str({ default: 'http://localhost:8080' })
 })
 
 export const routes = {
@@ -75,3 +76,6 @@ export const TOKENS = [
   }
 ]
 export type TokenOption = (typeof TOKENS)[number]
+
+export const LOGIN_MESSAGE =
+  'Welcome to Yushaku! Please sign this message to verify account ownership.'
