@@ -2,9 +2,9 @@ import { useGetProducts } from '@/apis'
 import { useGetPrice } from '@/apis/price'
 import { Button } from '@/components/common/Button'
 import { BSC, USDT } from '@/components/icons'
+import { cn } from '@/utils'
 import { ShoppingCartIcon, XMarkIcon } from '@heroicons/react/16/solid'
 import { useCartState } from './states'
-import { cn } from '@/utils'
 
 export const ShopPage = () => {
   const { add, remove, itemList } = useCartState()
@@ -38,26 +38,24 @@ export const ShopPage = () => {
                   alt={item.name}
                   className="w-full bg-cover object-cover"
                 />
-                <h3 className="animate absolute -bottom-6 left-5 z-10 group-hover:bottom-5">
+                <div className="animate absolute -bottom-11 left-5 z-10 group-hover:bottom-5">
                   <p className="mb-2 text-xl font-bold text-lighterAccent">
                     {item.name}
                   </p>
-                  <ol className="flex text-sm text-white">
-                    <li className="pr-2 font-bold">Price:</li>
-                    <li className="flex-center gap-2 pr-2">
-                      {item.price}
+                  <ol className="grid gap-1 text-sm text-white">
+                    <li className="flex items-center gap-2 pr-2">
                       <USDT className="inline-block size-5" />
+                      {item.price}
                     </li>
 
-                    <li className="flex-center gap-2 pr-2">
-                      {(Number(item.price) / (price ?? 1)).toFixed(5)}
+                    <li className="flex items-center gap-2 pr-2">
                       <BSC className="inline-block size-5" />
+                      {(Number(item.price) / (price ?? 1)).toFixed(5)}
                     </li>
                   </ol>
-                </h3>
+                </div>
 
                 <Button
-                  title={isAdded ? 'remove' : 'Add'}
                   icon={isAdded ? XMarkIcon : ShoppingCartIcon}
                   className={cn(
                     'animate absolute -bottom-6 right-5 z-50 opacity-0 delay-100 group-hover:bottom-5 group-hover:opacity-100',

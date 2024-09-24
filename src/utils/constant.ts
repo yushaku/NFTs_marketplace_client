@@ -27,6 +27,7 @@ export const routes = {
   bridge: '/bridge',
   dashboard: '/dashboard',
   shop: '/shop',
+  order: '/shop/order',
   admin: '/admin'
 } as const
 
@@ -76,6 +77,8 @@ export const TOKENS = [
   }
 ]
 export type TokenOption = (typeof TOKENS)[number]
+
+export const SHOP_PAYMENT = '0x4E3DdcCeEf165fC30F876cf81b4d7a80C2A1A7bD'
 
 export const LOGIN_MESSAGE =
   'Welcome to Yushaku! Please sign this message to verify account ownership.'

@@ -48,7 +48,7 @@ export const Swap = () => {
             <AdvancedRealTimeChart
               symbol={token.tradingview}
               theme="dark"
-              range="1D"
+              interval="D"
               calendar={false}
               hide_top_toolbar={false}
               hide_legend={true}

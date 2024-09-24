@@ -16,6 +16,7 @@ import { Swap } from './components/pages/Swap'
 import { Home } from './components/pages/home'
 import { routes } from './utils'
 import { ShopPage } from './modules/shop'
+import { HistoryPage } from './modules/history'
 
 function App() {
   return (
@@ -39,7 +40,7 @@ function App() {
             element={<UserNftDetail />}
           />
 
-          <Route path={routes.history} element={<Comming />} />
+          <Route path={routes.history} element={<HistoryPage />} />
           <Route path={routes.vaults} element={<Comming />} />
           <Route path={routes.bridge} element={<Comming />} />
           <Route path={routes.shop} element={<ShopPage />} />

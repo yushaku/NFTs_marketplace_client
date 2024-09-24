@@ -1,15 +1,16 @@
+import { useGetPrice } from '@/apis/price'
 import { Button } from '@/components/common/Button'
+import { Spinner } from '@/components/common/Loading'
 import { NativeToken } from '@/components/common/NativeTokenBalance'
 import { cn } from '@/utils'
 import {
   ShoppingBagIcon,
-  XMarkIcon,
-  TrashIcon
+  TrashIcon,
+  XMarkIcon
 } from '@heroicons/react/16/solid'
 import { useState } from 'react'
 import { useCartState } from '../states'
-import { useGetPrice } from '@/apis/price'
-import { Spinner } from '@/components/common/Loading'
+import { PaymentForm } from './PaymemtForm'
 
 export const ShopCartList = () => {
   const [toggle, setToggle] = useState(false)
@@ -88,7 +89,8 @@ export const ShopCartList = () => {
               {bnbPrice ? totalBnb.toFixed(5) : <Spinner />} <NativeToken />
             </span>
           </h3>
-          <Button className="w-full" title="Buy" />
+
+          <PaymentForm />
         </article>
       </div>
     </>

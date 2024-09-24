@@ -13,6 +13,7 @@ type State = {
 type Action = {
   add: (_cart: Cart) => void
   remove: (_id: number) => void
+  clearCart: () => void
   increase: (_id: number) => void
   decrease: (_id: number) => void
   setAmount: (_id: number, _quantity: number) => void
@@ -36,6 +37,11 @@ export const useCartState = create<State & Action>()(
           return {
             itemList: itemList.filter((item) => item.product_id !== id)
           }
+        }),
+
+      clearCart: () =>
+        set({
+          itemList: []
         }),
 
       increase: (id: number) =>
