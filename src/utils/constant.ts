@@ -47,6 +47,7 @@ export const STAKE_ADRESS = '0xb407fFcC4D82295790D684F812d97EFdbB6c3122'
 export const MARKETPLACE_ADDRESS = '0x7175AAA9f0b6B05fe713AEFDD7B0026e61bd7aC5'
 export const NFT_FACTORY_ADDRESS = '0x64FFE32eCb2D433fc0868920c98Bf33Bee4f072A'
 export const PUBLIC_NFTS_ADDRESS = '0x284C5d066a4A2fD0163D190887fC5EFB6b4E0540'
+export const SHOP_PAYMENT_ADDRESS = '0x4E3DdcCeEf165fC30F876cf81b4d7a80C2A1A7bD'
 
 export const MAX_VALUE = parseUnits('9999999999999999999999', 18)
 
@@ -77,8 +78,6 @@ export const TOKENS = [
   }
 ]
 export type TokenOption = (typeof TOKENS)[number]
-
-export const SHOP_PAYMENT = '0x4E3DdcCeEf165fC30F876cf81b4d7a80C2A1A7bD'
 
 export const LOGIN_MESSAGE =
   'Welcome to Yushaku! Please sign this message to verify account ownership.'

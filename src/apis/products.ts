@@ -6,6 +6,7 @@ import {
 } from '@tanstack/react-query'
 import instance from './client'
 import { ApiResponce } from '@/types'
+import { toast } from 'react-toastify'
 
 type Pagination = {
   page?: number
@@ -52,15 +53,17 @@ export type CreateAddress = {
   phone_number: string
 }
 
+const addressKey = '/users/address'
 export const useCreateAddress = () => {
   const queryClient = new QueryClient()
 
   return useMutation({
     mutationFn: (data: CreateAddress) => {
-      return instance.post('/users/address', data)
+      return instance.post(addressKey, data)
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['/users/address'] })
+    onSuccess: async () => {
+      toast.info('Created successfully')
+      await queryClient.invalidateQueries({ queryKey: [addressKey] })
     }
   })
 }
@@ -81,9 +84,9 @@ type GetAddressProps = {
 
 export const useGetAddresses = ({ params, options }: GetAddressProps) => {
   return useQuery({
-    queryKey: ['/users/address', JSON.stringify(params)],
+    queryKey: [addressKey, JSON.stringify(params)],
     queryFn: async () => {
-      const res = await instance.get('/users/address', {
+      const res = await instance.get(addressKey, {
         params: {
           page: params?.page || 1,
           perPage: params?.perPage || 10
@@ -128,19 +131,35 @@ export const useCreateOrder = () => {
   return useMutation({
     mutationFn: async (data: CreateOrder) => {
       const res = await instance.post('order', data)
-
       return res.data as OrderResponse
     }
   })
 }
 
+export type OrderStatus =
+  | 'pending'
+  | 'processing'
+  | 'shipped'
+  | 'delivered'
+  | 'cancelled'
+
 export type OrderInfo = {
   order_id: string
   user_wallet: string
   order_date: string
-  status: string
+  status: OrderStatus
   total_amount: string
   price_in_token: string
+  order_items: Array<{
+    product_id: string
+    price_in_token: string
+    quantity: number
+    total_price: string
+    product: {
+      banner: string
+      name: string
+    }
+  }>
   shipping_address_id: number
   created_at: Date
   updated_at: Date
@@ -154,11 +173,12 @@ type GetOrderProps = {
   >
 }
 
+const orderKey = '/order'
 export const useGetOrders = ({ params, options }: GetOrderProps) => {
   return useQuery({
-    queryKey: ['/order', JSON.stringify(params)],
+    queryKey: [orderKey, JSON.stringify(params)],
     queryFn: async () => {
-      const res = await instance.get('/order', {
+      const res = await instance.get(orderKey, {
         params: {
           page: params?.page || 1,
           perPage: params?.perPage || 10
@@ -167,5 +187,24 @@ export const useGetOrders = ({ params, options }: GetOrderProps) => {
       return res.data
     },
     ...options
+  })
+}
+
+export const useDeleteOrders = () => {
+  const queryClient = new QueryClient()
+
+  return useMutation({
+    mutationFn: async (order_ids: Array<string>) => {
+      const res = await instance.delete(orderKey, {
+        data: {
+          order_ids
+        }
+      })
+      return res.data
+    },
+    onSuccess: async () => {
+      toast.info('Deleted successfully')
+      await queryClient.invalidateQueries({ queryKey: [orderKey] })
+    }
   })
 }

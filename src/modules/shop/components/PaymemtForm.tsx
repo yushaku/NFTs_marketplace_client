@@ -5,7 +5,7 @@ import {
   useGetAddresses
 } from '@/apis'
 import { Button } from '@/components/common/Button'
-import { SHOP_PAYMENT, cn } from '@/utils'
+import { SHOP_PAYMENT_ADDRESS, cn } from '@/utils'
 import {
   Description,
   Dialog,
@@ -23,26 +23,29 @@ import { useSendTransaction } from 'wagmi'
 import { useCartState } from '../states'
 import { AddressForm } from './AddressForm'
 import { Spinner } from '@/components/common/Loading'
+import { toast } from 'react-toastify'
+
+const initialOrder = {
+  encodeData: '',
+  unit: 'ETH',
+  order: {
+    order_id: '',
+    price_in_token: ''
+  },
+  orderList: []
+}
 
 export const PaymentForm = () => {
   // GLOCAL STATE
   const { itemList, clearCart } = useCartState()
-  const { data, isSuccess, isPending, isError, sendTransaction } =
+  const { isSuccess, isPending, isError, sendTransaction } =
     useSendTransaction()
 
   // LOCAL STATE
   const [isOpen, setIsOpen] = useState(false)
   const [selected, setSelected] = useState<StreetAddress | null>(null)
   const [step, setStep] = useState(1)
-  const [order, setOrder] = useState<OrderResponse>({
-    encodeData: '',
-    unit: 'ETH',
-    order: {
-      order_id: '',
-      price_in_token: ''
-    },
-    orderList: []
-  })
+  const [order, setOrder] = useState<OrderResponse>(initialOrder)
 
   // CALL APIs
   const { data: addressList } = useGetAddresses({
@@ -74,16 +77,10 @@ export const PaymentForm = () => {
     setStep(2)
   }
 
-  console.log({
-    order,
-    data,
-    isSuccess
-  })
-
   const handleConfirm = async () => {
     sendTransaction(
       {
-        to: SHOP_PAYMENT,
+        to: SHOP_PAYMENT_ADDRESS,
         data: order.encodeData as `0x${string}`,
         value: parseEther(order.order.price_in_token)
       },
@@ -91,9 +88,17 @@ export const PaymentForm = () => {
         onSuccess: () => {
           setStep(3)
           clearCart()
+          setOrder(initialOrder)
         },
-        onError: () => {
+        onError: (e) => {
+          const msg = e.message.includes('User rejected')
+            ? 'User denied transaction signature'
+            : 'Error: Transaction failed'
+          toast.error(msg)
           setStep(4)
+        },
+        onSettled: () => {
+          setStep(1)
         }
       }
     )
@@ -151,9 +156,9 @@ export const PaymentForm = () => {
             </RadioGroup>
 
             <article className={cn('text-sm hidden', step === 2 && 'block')}>
-              <h6>Your order {order.order.order_id}</h6>
+              <h6>Your order {order?.order?.order_id}</h6>
               <p className="mt-1 font-bold">
-                Total: {order.order.price_in_token} {order.unit}
+                Total: {order?.order?.price_in_token} {order.unit}
               </p>
             </article>
 

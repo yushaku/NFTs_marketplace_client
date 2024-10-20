@@ -34,8 +34,8 @@ export const ShopCartList = () => {
       <div
         onClick={() => setToggle(false)}
         className={cn(
-          'animate delay-50 duration-100 fixed top-0 -right-full z-30 h-screen w-screen bg-gray-500/20',
-          toggle && 'right-0'
+          'animate delay-50 duration-100 hidden fixed top-0 -right-full z-30 h-screen w-screen bg-gray-500/20',
+          toggle && 'right-0 block'
         )}
       />
 
